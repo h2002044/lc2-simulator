@@ -552,3 +552,4 @@ The **_Instruction Summary Panel_** shows the summary of execution of every inst
 
 * mvn clean install
 * java -jar $PROJECT_HOME/target/lc2-simulator-$PROJECT_VERSION.jar
+* Once the simulator starts, use any of the files from `src/main/resources` having `.LC2` extension for samples.
