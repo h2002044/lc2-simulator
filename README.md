@@ -1,16 +1,51 @@
-[TOC]
+
+- [LC – 2 SIMULATOR](#lc-%E2%80%93-2-simulator)
+  * [Overview:](#overview)
+  * [Architecture:](#architecture)
+  * [Instruction Set:](#instruction-set)
+    + [Operate Instructions:](#operate-instructions)
+    + [Data Movement Instructions:](#data-movement-instructions)
+    + [Control Instructions:](#control-instructions)
+  * [Instruction Cycle:](#instruction-cycle)
+    + [FETCH:](#fetch)
+    + [DECODE:](#decode)
+    + [EVALUATE ADDRESS:](#evaluate-address)
+    + [OPERAND FETCH:](#operand-fetch)
+    + [EXECUTE:](#execute)
+    + [STORE RESULT:](#store-result)
+  * [Data Path:](#data-path)
+    + [SIMULATOR](#simulator)
+  * [Editor:](#editor)
+    + [Mnemonics Pad:](#mnemonics-pad)
+    + [Number Pad:](#number-pad)
+    + [Registers Pad:](#registers-pad)
+    + [Instruction Help:](#instruction-help)
+    + [Bitwise Instruction Indicator:](#bitwise-instruction-indicator)
+    + [Program Area:](#program-area)
+    + [Segment Selector:](#segment-selector)
+    + [Execution:](#execution)
+    + [Tool Bar:](#tool-bar)
+    + [New:](#new)
+    + [Open:](#open)
+    + [Save:](#save)
+    + [Run Mode:](#run-mode)
+    + [Step Mode:](#step-mode)
+    + [Stop:](#stop)
+    + [Output Summary:](#output-summary)
+    + [File Information:](#file-information)
+  * [Simulation Panel:](#simulation-panel)
+    + [Data Flow Path Panel:](#data-flow-path-panel)
+    + [Registers Panel:](#registers-panel)
+    + [Instruction Summary Panel:](#instruction-summary-panel)
+  * [How to build and run:](#how-to-build-and-run)
+  
+# LC – 2 SIMULATOR
 
 
-**LC – 2 SIMULATOR**
-
-
-```
-Overview:
-```
+## Overview:
 
 
 LC-2 Simulator is used to run the Assembly Code of LC-2 Microprocessor. This software simulates the execution of instructions coded by the user and displays the instruction execution step by step. The simulation includes,
-
 
 
 *   Display of how registers R0 to R7, Program Counter, Positive, Negative, Zero flag are getting affected. 
@@ -18,16 +53,15 @@ LC-2 Simulator is used to run the Assembly Code of LC-2 Microprocessor. This sof
 *   Summary of all the micro instructions that are getting executed.
 
 
-```
-Architecture:
-```
+
+
+## Architecture:
+
 
 
 LC-2 is a **Reduced Instruction Set Computer.**
 
 It has:
-
-
 
 *   8 Registers starting from R0 to R7, 
 *   Program Counter, 
@@ -41,22 +75,20 @@ Memory is divided into Segments. Every segment can address up to 256 memory
 locations. So there are 52 segments.
 
 
-```
-Instruction Set:
-```
+
+## Instruction Set:
+
 
 Following are the Instruction types support by LC-2
 
-**Operate Instructions:**
+### Operate Instructions:
 
-The Operate instructions include 
-
-
+The Operate instructions include: 
 
 *   Arithmetic Operations ADD, SUB, MUL and DIV
 *   Logical Operations AND, OR, NOT, XOR
 
-**Data Movement Instructions:**
+### Data Movement Instructions:
 
 These instructions include:
 
@@ -67,13 +99,11 @@ These instructions include:
 *   Indirect Mode
 *   Base + Offset Mode
 
-**Control Instructions:**
+### Control Instructions:
 
 Control Instructions change the sequence of the instructions that are executed.
 
-These include
-
-
+These include:
 
 *   BR (Break based on P, Z, N flag conditions)
 *   JMP (Jump)
@@ -84,37 +114,36 @@ These include
 *   TRAP
 
 
-```
-Instruction Cycle:
-```
+
+## Instruction Cycle:
 
 
-**FETCH:**
+
+### FETCH:
 
 * The instruction cycle starts with FETCH phase. The instruction is obtained by accessing memory with the address contained in the PC. 
 * In the first cycle, the contents of the PC are loaded via the global bus into the MAR, and the PC is incremented and loaded into the PC. At the end of this cycle, the PC contains location.
 * In the next cycle, the memory is read, and the instruction is loaded into the MDR (Memory Data Register). 
 * In the next cycle, the contents of the MDR are loaded into the Instruction Register (IR), completing the FETCH phase.
 
-**DECODE:**
+### DECODE:
 In the next cycle, the contents of the IR are decoded, resulting in the control logic providing the correct control signals to control the processing of the rest of this instruction. The opcode is identified.
 
-**EVALUATE ADDRESS:**
+### EVALUATE ADDRESS:
 In the next cycle, the address of location is evaluated using ZERO Extension or SIGN Extension.
 
-**OPERAND FETCH:**
+### OPERAND FETCH:
 In the next cycle the data at the address is loaded into the MDR
 
-**EXECUTE:**
+### EXECUTE:
 The instruction is executed.
 
-**STORE RESULT:**
+### STORE RESULT:
 The last cycle in which the results are stored.
 
 
-```
-Data Path:
-```
+
+## Data Path:
 
 The data path reveals how the data is sent and manipulated among various components of the Microprocessor.
 
@@ -126,15 +155,13 @@ The basic components of Data path includes,
 *   PC and PCMUX (PC Multiplexer)
 *   MARMUX (Memory Address Register Multiplexer)
 
-**SIMULATOR**
+### SIMULATOR
 
 
-```
-Editor:
-```
+
+## Editor:
+
 The Figure shows the EDITOR part of the SIMULATOR. This editor is used to write LC-2 Code. The editor has following components.
-
-
 
 *   Mnemonics Pad
 *   Number Pad
@@ -150,8 +177,7 @@ The Figure shows the EDITOR part of the SIMULATOR. This editor is used to write 
 ![alt_text](docs/images/overview.jpg "Overview")
 
 
-**Mnemonics Pad:**
-
+### Mnemonics Pad:
 
 <table>
   <tr>
@@ -168,7 +194,7 @@ Every Instruction (Mnemonics) is provided with a context sensitive help (ToolTip
 </table>
 
 
-**Number Pad:**
+### Number Pad:
 
 
 <table>
@@ -188,7 +214,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
 </table>
 
 
-**Registers Pad:**
+### Registers Pad:
 
 
 <table>
@@ -204,7 +230,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
 </table>
 
 
-**Instruction Help:**
+### Instruction Help:
 
 
 <table>
@@ -220,7 +246,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
 </table>
 
 
-**Bitwise Instruction Indicator:**
+### Bitwise Instruction Indicator:
 
 
 <table>
@@ -236,7 +262,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
 </table>
 
 
-**Program Area:**
+### Program Area:
 
 
 <table>
@@ -265,8 +291,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
   </tr>
 </table>
 
-
-**Segment Selector:**
+### Segment Selector:
 
 
 <table>
@@ -284,7 +309,7 @@ Features are provided in such a way that if user needs to give Hexadecimal data,
 </table>
 
 
-**Execution:**
+### Execution:
 
 
 <table>
@@ -306,7 +331,7 @@ In <strong><em>STEP</em></strong> mode the simulation is shown and user can chan
 </table>
 
 
-**Tool Bar:**
+### Tool Bar:
 
 
 <table>
@@ -324,7 +349,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**New:**
+### New:
 
 
 <table>
@@ -340,7 +365,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Open:**
+### Open:
 
 
 <table>
@@ -356,7 +381,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Save:**
+### Save:
 
 
 <table>
@@ -372,7 +397,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Run Mode:**
+### Run Mode:
 
 
 <table>
@@ -388,7 +413,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Step Mode:**
+### Step Mode:
 
 
 <table>
@@ -404,7 +429,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Stop:**
+### Stop:
 
 
 <table>
@@ -420,7 +445,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**Output Summary:**
+### Output Summary:
 
 
 <table>
@@ -436,7 +461,7 @@ Depending upon the mode of execution selected (STEP or RUN), the buttons in the 
 </table>
 
 
-**File Information:**
+### File Information:
 
 
 <table>
@@ -455,9 +480,7 @@ This dialog shows the segments in which Mnemonics, instructions and data are fou
 
 
 
-```
-Simulation Panel:
-```
+## Simulation Panel:
 
 
 The **SIMULATION Panel** consists of
@@ -471,7 +494,7 @@ The **SIMULATION Panel** consists of
 ![alt_text](docs/images/simulation.jpg "Simulation Panel")
 
 
-**Data Flow Path Panel:**
+### Data Flow Path Panel:
 
 Data Flow Path Panel represents the flow of data among various components of the **_Microprocessor_** including
 
@@ -499,7 +522,7 @@ Data Flow Path Panel represents the flow of data among various components of the
 ![alt_text](docs/images/data-flow.jpg "Data Flow Path Panel")
 
 
-**Registers Panel:**
+### Registers Panel:
 
 * Registers Panel is used to display the _contents _of **_Registers, PC, Zero, Negative, Positive Flags _**during the execution of every instruction.
 * If the program is in **_STEP MODE_**, then user can modify the contents of **_Registers, PC_** after every instruction if he desires.
@@ -510,7 +533,7 @@ Data Flow Path Panel represents the flow of data among various components of the
 ![alt_text](docs/images/registers-panel.jpg "Registers Panel")
 
 
-**Instruction Summary Panel:**
+### Instruction Summary Panel:
 
 The **_Instruction Summary Panel_** shows the summary of execution of every instruction that was executed in the program. The summary shows the contents of 
 
@@ -524,3 +547,8 @@ The **_Instruction Summary Panel_** shows the summary of execution of every inst
 
 ![alt_text](docs/images/instruction-summary.jpg "Instruction Summary")
 
+
+## How to build and run:
+
+* mvn clean install
+* java -jar $PROJECT_HOME/target/lc2-simulator-$PROJECT_VERSION.jar
