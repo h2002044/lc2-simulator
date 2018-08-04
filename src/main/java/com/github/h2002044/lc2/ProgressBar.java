@@ -5,12 +5,10 @@ import java.awt.*;
 
 /**
  * To display Progress Bar when the application starts.
- * @author Jagadish Prasath
  *
- * 
+ * @author Jagadish Prasath
  */
-public class ProgressBar extends JWindow
-{
+public class ProgressBar extends JWindow {
     JProgressBar jpbBar;
     JPanel jpProgressBar;
     JButton jb;
@@ -18,19 +16,17 @@ public class ProgressBar extends JWindow
     String sProgressText = "";
     boolean bStatus = true;
 
-    public void fSetFinishedStatus(boolean bStatus)
-    {
+    public void fSetFinishedStatus(boolean bStatus) {
         this.bStatus = bStatus;
     }
-/**
- * 
- * @param sText Text to be displayed
- * @param iMaxValue % Completed Value
- * @param widthFactor For Screen Resolution
- * @param heightFactor For Screen Resolution
- */
-    public ProgressBar(String sText, int iMaxValue, float widthFactor, float heightFactor)
-    {
+
+    /**
+     * @param sText        Text to be displayed
+     * @param iMaxValue    % Completed Value
+     * @param widthFactor  For Screen Resolution
+     * @param heightFactor For Screen Resolution
+     */
+    public ProgressBar(String sText, int iMaxValue, float widthFactor, float heightFactor) {
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         getContentPane().setLayout(null);
 
@@ -48,15 +44,13 @@ public class ProgressBar extends JWindow
 
     }
 
-    public void fSetValue()
-    {
+    public void fSetValue() {
         jpbBar.setString(sProgressText);
         jpbBar.setValue(iValue);
         jpbBar.setStringPainted(true);
         jpbBar.validate();
 
-        if (iValue == 100)
-        {
+        if (iValue == 100) {
             this.setCursor(new Cursor(Cursor.CUSTOM_CURSOR));
         }
     }

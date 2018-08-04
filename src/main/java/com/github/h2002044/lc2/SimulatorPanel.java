@@ -6,13 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
-
 /**
- *  SimulatorPanel class is used to create GUI for Registers, Execution Summary, Simulation.<br>
+ * SimulatorPanel class is used to create GUI for Registers, Execution Summary, Simulation.<br>
  */
-public class SimulatorPanel extends JPanel implements ActionListener
-{
+public class SimulatorPanel extends JPanel implements ActionListener {
 
     public Circuit objSimulate;
     private JPanel jpResize;
@@ -33,10 +30,9 @@ public class SimulatorPanel extends JPanel implements ActionListener
     public float fHeightFactor;
 
     /**
-     *  fSetDimension() is used to find out the Width, Height of the screen, so as to set the resolution factor<br>
+     * fSetDimension() is used to find out the Width, Height of the screen, so as to set the resolution factor<br>
      */
-    public void fSetDimension()
-    {
+    public void fSetDimension() {
         int iWidth;
         int iHeight;
 
@@ -48,8 +44,7 @@ public class SimulatorPanel extends JPanel implements ActionListener
         fHeightFactor = ((float) iHeight / 600);
     }
 
-    public SimulatorPanel()
-    {
+    public SimulatorPanel() {
         fSetDimension();
         setLayout(null);
         objSimulate = new Circuit();
@@ -96,11 +91,11 @@ public class SimulatorPanel extends JPanel implements ActionListener
         objRegisters.setLocation((int) (10 * fWidthFactor), (int) (400 * fHeightFactor));
 
 
-        objExecutionSummary = new FlowSummary(fWidthFactor,fHeightFactor);
+        objExecutionSummary = new FlowSummary(fWidthFactor, fHeightFactor);
         objExecutionSummary.setSize((int) (250 * fWidthFactor), (int) (480 * fHeightFactor));
         objExecutionSummary.setLocation((int) (530 * fWidthFactor), (int) (25 * fHeightFactor));
 
-        objDataFlow = new DataFlow(objSimulate,objExecutionSummary);
+        objDataFlow = new DataFlow(objSimulate, objExecutionSummary);
 
         add(objExecutionSummary);
 
@@ -109,18 +104,14 @@ public class SimulatorPanel extends JPanel implements ActionListener
         add(objRegisters);
     }
 
-    public void actionPerformed(ActionEvent ae)
-    {
-        if (ae.getActionCommand().equalsIgnoreCase("+") == true)
-        {
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getActionCommand().equalsIgnoreCase("+") == true) {
             objSimulate.fDrawMaximized();
             jspSimulate.setSize((int) (fWidthFactor * 800), (int) (fHeightFactor * 600));
             jspSimulate.validate();
             jspContainer.validate();
             validate();
-        }
-        else if (ae.getActionCommand().equalsIgnoreCase("-") == true)
-        {
+        } else if (ae.getActionCommand().equalsIgnoreCase("-") == true) {
             objSimulate.fDrawMinimized();
             jspSimulate.setSize((int) (fWidthFactor * 800), (int) (fHeightFactor * 600));
             jspSimulate.validate();

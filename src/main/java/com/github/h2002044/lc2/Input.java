@@ -4,17 +4,17 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
- *  Input Class is used to initialise the GUI for LC-2 Simulator.<br>
- *  The GUI has 2 parts, Editor Pane, Simulator Pane.<br>
- *  Editor Window is used to make LC-2 Programs, Options like Saving, Editing, Opening, Creating New files are available.<br>
- *  Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
+ * Input Class is used to initialise the GUI for LC-2 Simulator.<br>
+ * The GUI has 2 parts, Editor Pane, Simulator Pane.<br>
+ * Editor Window is used to make LC-2 Programs, Options like Saving, Editing, Opening, Creating New files are available.<br>
+ * Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
  */
 
-public class Input extends JFrame
-{
+public class Input extends JFrame {
     Container contentpane;
     JTabbedPane jtpMain;
     JTabbedPane jtpSimulate;
@@ -41,16 +41,14 @@ public class Input extends JFrame
     Font fntBlueBoldFont;
 
 
-
     /**
-     *  Input Class is used to initialise the GUI for LC-2 Simulator.<br>
-     *  The GUI has 2 parts, Editor Pane, Simulator Pane.<br>
-     *  Editor Window is used to make LC-2 Programs, Options like Saving, Editing, Opening, Creating New files are available.<br>
-     *  Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
+     * Input Class is used to initialise the GUI for LC-2 Simulator.<br>
+     * The GUI has 2 parts, Editor Pane, Simulator Pane.<br>
+     * Editor Window is used to make LC-2 Programs, Options like Saving, Editing, Opening, Creating New files are available.<br>
+     * Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
      */
 
-    public Input()
-    {
+    public Input() {
         setIconImage(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/Icon.gif")).getImage());
         setTitle(" L C -- 2  S I M U L A T O R   [ B I T S - P I L A N I ]");
         getContentPane().setLayout(new BorderLayout());
@@ -58,7 +56,7 @@ public class Input extends JFrame
         fSetDimension();
 
         objFlashScreen = new FlashScreen("INITIALISING . . . .", 100, fHeightFactor);
-        objFlashScreen.setSize(350,300);
+        objFlashScreen.setSize(350, 300);
 
 
         int iXPosition = (int) (fWidthFactor * 800);
@@ -82,13 +80,13 @@ public class Input extends JFrame
         objFlashScreen.fSetText("I N I T I A L I S I N G     E D I T O R  . . .");
         fDelay();
         objExecute = new SimulatorPanel();
-        objEditor = new Editor( jtpMain, objExecute,  objFlashScreen, fWidthFactor, fHeightFactor, fnt, fntBlueBoldFont);
+        objEditor = new Editor(jtpMain, objExecute, objFlashScreen, fWidthFactor, fHeightFactor, fnt, fntBlueBoldFont);
 
 
         objFlashScreen.fSetText("I N I T I A L I S I N G     T O O L B A R . . .");
 
         fDelay();
-        
+
         jtbEditor = new ToolBar(fWidthFactor, fHeightFactor, objEditor, null, objExecute);
         objEditor.setToolBar(jtbEditor);
         jtbEditor.fDisableRun();
@@ -117,8 +115,7 @@ public class Input extends JFrame
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new MyWindowAdapter());
 
-        if (objFlashScreen.fGetLoadingStatus() == true)
-        {
+        if (objFlashScreen.fGetLoadingStatus() == true) {
             objFlashScreen.setVisible(false);
             objFlashScreen.hide();
             objFlashScreen.fResetLoadingStatus();
@@ -127,48 +124,37 @@ public class Input extends JFrame
     }
 
     /**
-     *  fDelay is used to give delay while displaying Flash Screen.<br>
-     *  The Flash Screen displays the components that are getting initialised sequentially<br>
+     * fDelay is used to give delay while displaying Flash Screen.<br>
+     * The Flash Screen displays the components that are getting initialised sequentially<br>
      */
 
-    public void fDelay()
-    {
-        try
-        {
+    public void fDelay() {
+        try {
             Thread.sleep(100);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
     /**
-     *  processWindowEvent is used to handle the events that are generated on Window.<br>
-     *  This function will be executed by the AWT Event Thread<br>
+     * processWindowEvent is used to handle the events that are generated on Window.<br>
+     * This function will be executed by the AWT Event Thread<br>
      */
 
-    protected void processWindowEvent(WindowEvent e)
-    {
-        if (bWindowClosing == true)
-        {
+    protected void processWindowEvent(WindowEvent e) {
+        if (bWindowClosing == true) {
             bWindowClosing = false;
 
-            if (iOption == JOptionPane.YES_OPTION)
-            {
+            if (iOption == JOptionPane.YES_OPTION) {
                 setVisible(false);
                 System.out.println("YES OPTION");
                 System.exit(0);
-            }
-            else if (iOption == JOptionPane.NO_OPTION)
-            {
+            } else if (iOption == JOptionPane.NO_OPTION) {
                 setVisible(false);
                 System.out.println("NO OPTION");
                 System.exit(0);
-            }
-            else if (iOption == JOptionPane.CANCEL_OPTION)
-            {
+            } else if (iOption == JOptionPane.CANCEL_OPTION) {
                 iOption = -1;
                 System.out.println("CANCEL OPTION");
                 return;
@@ -182,12 +168,11 @@ public class Input extends JFrame
 
 
     /**
-     *  fSetMenuBar() is used to set the menu.
-     *  This menubar has File Open/New/Save options, Help Tutor/Context options, Execute Run/Debug options
+     * fSetMenuBar() is used to set the menu.
+     * This menubar has File Open/New/Save options, Help Tutor/Context options, Execute Run/Debug options
      */
 
-    private JMenuBar fSetMenuBar()
-    {
+    private JMenuBar fSetMenuBar() {
         JMenuBar jmbEditor = new JMenuBar();
 
         JMenu jmFile = new JMenu("File");
@@ -253,10 +238,9 @@ public class Input extends JFrame
     }
 
     /**
-     *  fSetDimension is used to find out the screen widht/height and resolution so as to arrange the GUI components properly<br>
+     * fSetDimension is used to find out the screen widht/height and resolution so as to arrange the GUI components properly<br>
      */
-    public void fSetDimension()
-    {
+    public void fSetDimension() {
 
         Dimension dmnScreen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -275,11 +259,10 @@ public class Input extends JFrame
     }
 
     /**
-     *  fInitialiseInput is used to initialise the components for EDITOR<br>
+     * fInitialiseInput is used to initialise the components for EDITOR<br>
      */
-    public void fInitialiseInput()
-    {
-        objEditor = new Editor(jtpMain, objExecute, objFlashScreen, fWidthFactor, fHeightFactor, fnt,fntBlueBoldFont);
+    public void fInitialiseInput() {
+        objEditor = new Editor(jtpMain, objExecute, objFlashScreen, fWidthFactor, fHeightFactor, fnt, fntBlueBoldFont);
 
 
         jtpMain.addTab("C O D E -- E D I T O R", objEditor);
@@ -288,77 +271,69 @@ public class Input extends JFrame
 
 
     /**
-     *  isRun is a STATIC function which returns a boolean value indicating whether the program is under execution or not<br>
-     *  @ return status of the program running or not running.<br>
+     * isRun is a STATIC function which returns a boolean value indicating whether the program is under execution or not<br>
+     *
+     * @ return status of the program running or not running.<br>
      */
-    public static boolean isRun()
-    {
+    public static boolean isRun() {
         return bRun;
     }
 
     /**
-     *  fSetRun is a STATIC function which is used to set the running status of the program to false/true<br>
-     *  @ param Status of the program running/not running.<br>
+     * fSetRun is a STATIC function which is used to set the running status of the program to false/true<br>
+     *
+     * @ param Status of the program running/not running.<br>
      */
-    public static void setRun(boolean bRun)
-    {
+    public static void setRun(boolean bRun) {
         Input.bRun = bRun;
     }
 
     /**
-     *  getScreenWidth is used to return the width of the screen<br>
-     *  @ return width of the screen (int)<br>
+     * getScreenWidth is used to return the width of the screen<br>
+     *
+     * @ return width of the screen (int)<br>
      */
-    public int getScreenWidth()
-    {
+    public int getScreenWidth() {
         return iScreenWidth;
     }
 
     /**
-     *  setScreenWidth is used to set the width of the screen<br>
-     *  @ param width of the screen (int) <BR>
+     * setScreenWidth is used to set the width of the screen<br>
+     *
+     * @ param width of the screen (int) <BR>
      */
-    public void setScreenWidth(int iScreenWidth)
-    {
+    public void setScreenWidth(int iScreenWidth) {
         this.iScreenWidth = iScreenWidth;
     }
 
     /**
-     *  getScreenHeight is used to return the height of the screen<br>
-     *  @ return height of the screen (int)<br>
+     * getScreenHeight is used to return the height of the screen<br>
+     *
+     * @ return height of the screen (int)<br>
      */
-    public int getScreenHeight()
-    {
+    public int getScreenHeight() {
         return iScreenHeight;
     }
 
     /**
-     *  setScreenHeight is used to set the Height of the screen<br>
-     *  @ param Height of the screen (int) <BR>
+     * setScreenHeight is used to set the Height of the screen<br>
+     *
+     * @ param Height of the screen (int) <BR>
      */
-    public void setScreenHeight(int iScreenHeight)
-    {
+    public void setScreenHeight(int iScreenHeight) {
         this.iScreenHeight = iScreenHeight;
     }
 
 
-
-    private class TabbedPaneChangeListener implements ChangeListener
-    {
-        public void stateChanged(ChangeEvent ce)
-        {
-            if (isRun() == true)
-            {
+    private class TabbedPaneChangeListener implements ChangeListener {
+        public void stateChanged(ChangeEvent ce) {
+            if (isRun() == true) {
                 int iIndex = jtpMain.getSelectedIndex();
-                if (iIndex == 0)
-                {
+                if (iIndex == 0) {
                     jtpMain.setSelectedIndex(1);
                 }
-            }
-            else
-            {
-                if (bRunning == true)
-                {
+            } else {
+                if (bRunning == true) {
                     objEditor.fUpdateTableAfterRun();
                     bRunning = false;
                     jtbEditor.fDisableRun();
@@ -369,33 +344,26 @@ public class Input extends JFrame
         }
     }
 
-    private class MyWindowAdapter extends WindowAdapter
-    {
-        public void windowClosing(WindowEvent we)
-        {
+    private class MyWindowAdapter extends WindowAdapter {
+        public void windowClosing(WindowEvent we) {
             int iSaveStatus = JOptionPane.showConfirmDialog(null, "S A V E  F I L E ", "SAVE  FILE", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (iSaveStatus == JOptionPane.YES_OPTION)
-            {
+            if (iSaveStatus == JOptionPane.YES_OPTION) {
                 objEditor.fSaveHashTable2File();
 
                 bWindowClosing = true;
                 iOption = iSaveStatus;
                 setVisible(false);
                 System.exit(0);
-            }
-            else if (iSaveStatus == JOptionPane.CANCEL_OPTION)
-            {
+            } else if (iSaveStatus == JOptionPane.CANCEL_OPTION) {
                 bWindowClosing = true;
                 iOption = iSaveStatus;
-            }
-            else if (iSaveStatus == JOptionPane.NO_OPTION)
-            {
+            } else if (iSaveStatus == JOptionPane.NO_OPTION) {
                 bWindowClosing = true;
                 iOption = iSaveStatus;
 
                 setVisible(false);
                 System.exit(0);
             }
-       }
+        }
     }
 }
