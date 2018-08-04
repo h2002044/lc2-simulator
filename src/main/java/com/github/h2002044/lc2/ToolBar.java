@@ -2,17 +2,16 @@ package com.github.h2002044.lc2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigInteger;
 
 /**
- *  Class ToolBar is used to set the tool bar.<br>
- *  The toolbar has the options File Open/New/Save options, Help Tutor/Context options, Execute Run/Debug options<br>
+ * Class ToolBar is used to set the tool bar.<br>
+ * The toolbar has the options File Open/New/Save options, Help Tutor/Context options, Execute Run/Debug options<br>
  */
 
-public class ToolBar extends JToolBar implements ActionListener
-{
+public class ToolBar extends JToolBar implements ActionListener {
 
     private JButton jbNew;              //New Button
     private JButton jbOpen;             //Open Button
@@ -26,10 +25,9 @@ public class ToolBar extends JToolBar implements ActionListener
     private SimulatorPanel objExecute;
 
     /**
-     *  Constructor for the class ToolBar, which internally calls fSetToolBar()<br>
+     * Constructor for the class ToolBar, which internally calls fSetToolBar()<br>
      */
-    public ToolBar(float widthFactor, float heightFactor, Editor editor, Execute objExe, SimulatorPanel objExecute)
-    {
+    public ToolBar(float widthFactor, float heightFactor, Editor editor, Execute objExe, SimulatorPanel objExecute) {
         fSetToolBar(widthFactor, heightFactor);
         this.objEditor = editor;
         this.objExe = objExe;
@@ -37,93 +35,76 @@ public class ToolBar extends JToolBar implements ActionListener
     }
 
     /**
-     *  fDisableRun is used to disable the button "RUN" in the toolbar.<br>
+     * fDisableRun is used to disable the button "RUN" in the toolbar.<br>
      */
-    public void fDisableRun()
-    {
+    public void fDisableRun() {
         jbExecute.setEnabled(false);
     }
 
     /**
-     *  fEnableRun is used to enable the button "RUN" in the toolbar.<br>
+     * fEnableRun is used to enable the button "RUN" in the toolbar.<br>
      */
-    public void fEnableRun()
-    {
+    public void fEnableRun() {
         jbExecute.setEnabled(true);
     }
 
 
     /**
-     *  fDisableStep is used to disable the button "STEP" in the toolbar.<br>
+     * fDisableStep is used to disable the button "STEP" in the toolbar.<br>
      */
-    public void fDisableStep()
-    {
+    public void fDisableStep() {
         jbStep.setEnabled(false);
     }
 
     /**
-     *  fEnableStep is used to enable the button "STEP" in the toolbar.<br>
+     * fEnableStep is used to enable the button "STEP" in the toolbar.<br>
      */
-    public void fEnableStep()
-    {
+    public void fEnableStep() {
         jbStep.setEnabled(true);
     }
 
     /**
-     *  fEnableStop is used to enable the button "STOP" in the toolbar.<br>
+     * fEnableStop is used to enable the button "STOP" in the toolbar.<br>
      */
-    public void fDisableStop()
-    {
+    public void fDisableStop() {
         jbStop.setEnabled(false);
     }
 
 
     /**
-     *  fDisableStop is used to disable the button "STOP" in the toolbar.<br>
+     * fDisableStop is used to disable the button "STOP" in the toolbar.<br>
      */
-    public void fEnableStop()
-    {
+    public void fEnableStop() {
         jbStop.setEnabled(true);
     }
 
-    public void actionPerformed(ActionEvent ae)
-    {
+    public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
-        if(source==jbNew)
-        {
+        if (source == jbNew) {
             int iSaveStatus = JOptionPane.showConfirmDialog(null, "S A V E  F I L E ", "SAVE FILE", JOptionPane.YES_NO_CANCEL_OPTION);
-            if (iSaveStatus == JOptionPane.YES_OPTION)
-            {
-                Runnable SavingEvent = new Runnable()
-                {
-                    public void run()
-                    {
+            if (iSaveStatus == JOptionPane.YES_OPTION) {
+                Runnable SavingEvent = new Runnable() {
+                    public void run() {
                         objEditor.fSaveHashTable2File();
                     }
                 };
 
                 Thread SavingThread = new Thread(SavingEvent, "Saving EventThread for New File");
                 SavingThread.start();
-            }
-            else if (iSaveStatus == JOptionPane.CANCEL_OPTION)
-            {
+            } else if (iSaveStatus == JOptionPane.CANCEL_OPTION) {
                 return;
             }
 
             objEditor.fInitialiseRAM(null);
             String sSegment = (String) objEditor.jcbSegment.getSelectedItem();
-            if (sSegment.equalsIgnoreCase("SEGMENT") == false)
-            {
+            if (sSegment.equalsIgnoreCase("SEGMENT") == false) {
                 sSegment = sSegment.substring(2);
                 objEditor.fLoadTable(new BigInteger(sSegment, 16));
             }
-        }
-        else if(source==jbOpen)
-        {
+        } else if (source == jbOpen) {
             String sSegment = (String) objEditor.jcbSegment.getSelectedItem();
 
-            if (!(sSegment.equalsIgnoreCase("SEGMENT") == true))
-            {
+            if (!(sSegment.equalsIgnoreCase("SEGMENT") == true)) {
                 objEditor.fUpdateHashTable(sSegment);
             }
 
@@ -131,61 +112,45 @@ public class ToolBar extends JToolBar implements ActionListener
 
             sSegment = (String) objEditor.jcbSegment.getSelectedItem();
             objEditor.fEnableRunStatus();
-            if (sSegment.equalsIgnoreCase("SEGMENT") == false)
-            {
+            if (sSegment.equalsIgnoreCase("SEGMENT") == false) {
                 sSegment = sSegment.substring(2);
                 objEditor.fLoadTable(new BigInteger(sSegment, 16));
             }
-        }
-        else if(source==jbSave)
-        {
+        } else if (source == jbSave) {
             String sSegment = (String) objEditor.jcbSegment.getSelectedItem();
 
-            if (!(sSegment.equalsIgnoreCase("SEGMENT") == true))
-            {
+            if (!(sSegment.equalsIgnoreCase("SEGMENT") == true)) {
                 objEditor.fUpdateHashTable(sSegment);
             }
 
-            Runnable SavingEvent = new Runnable()
-            {
-                public void run()
-                {
+            Runnable SavingEvent = new Runnable() {
+                public void run() {
                     objEditor.fSaveHashTable2File();
                 }
             };
 
             Thread SavingThread = new Thread(SavingEvent, "Saving EventThread for Save File");
             SavingThread.start();
-        }
-        else if(source==jbStep)
-        {
+        } else if (source == jbStep) {
             objExe.fSetMode("STEP");
             objExe.fNotify();
-        }
-        else if(source==jbStop)
-        {
+        } else if (source == jbStop) {
             objExe.fSetMode("STOP");
             objExe.fNotify();
-        }
-        else if(source==jbExecute)
-        {
+        } else if (source == jbExecute) {
             objExe.fSetMode("RUN");
             objExe.fNotify();
-        }
-        else if(source==jbOutputSummary)
-        {
+        } else if (source == jbOutputSummary) {
             objExecute.objOutputSummary.showOutputSummary();
         }
 
 
-
-
     }
+
     /**
-     *  fSetToolBar is used to initialise and set the toolbar with buttons<br>
+     * fSetToolBar is used to initialise and set the toolbar with buttons<br>
      */
-    private void fSetToolBar(float fWidthFactor, float fHeightFactor)
-    {
+    private void fSetToolBar(float fWidthFactor, float fHeightFactor) {
         setOrientation(JToolBar.VERTICAL);
 
         addSeparator(new Dimension((int) (10 * fWidthFactor), (int) (100 * fHeightFactor)));
@@ -199,7 +164,7 @@ public class ToolBar extends JToolBar implements ActionListener
 
 
         addSeparator(new Dimension((int) (10 * fWidthFactor), (int) (10 * fHeightFactor)));
-        
+
 
         ImageIcon imgOpen = new ImageIcon(this.getClass().getClassLoader().getResource("Icons/OPEN.gif"));
         jbOpen = new JButton(imgOpen);
@@ -249,13 +214,11 @@ public class ToolBar extends JToolBar implements ActionListener
         addSeparator(new Dimension((int) (10 * fWidthFactor), (int) (10 * fHeightFactor)));
     }
 
-    public Execute getObjExe()
-    {
+    public Execute getObjExe() {
         return objExe;
     }
 
-    public void setObjExe(Execute objExe)
-    {
+    public void setObjExe(Execute objExe) {
         this.objExe = objExe;
     }
 }

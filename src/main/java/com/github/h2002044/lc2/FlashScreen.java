@@ -10,8 +10,7 @@ import java.awt.*;
  * Time: 6:47:54 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FlashScreen extends JWindow
-{
+public class FlashScreen extends JWindow {
     private JProgressBar jpbBar;
     private JPanel jpProgressBar;
     private JPanel jpScreen;
@@ -21,28 +20,23 @@ public class FlashScreen extends JWindow
     private boolean bStatus = true;
     private boolean bFirstLoading = true;
 
-    public boolean fGetLoadingStatus()
-    {
+    public boolean fGetLoadingStatus() {
         return bFirstLoading;
     }
 
-    public void fResetLoadingStatus()
-    {
+    public void fResetLoadingStatus() {
         bFirstLoading = false;
     }
 
-    public void fSetLoadingStatus(boolean bLoadingStatus)
-    {
+    public void fSetLoadingStatus(boolean bLoadingStatus) {
         this.bFirstLoading = bLoadingStatus;
     }
 
-    public void fSetFinishedStatus(boolean bStatus)
-    {
+    public void fSetFinishedStatus(boolean bStatus) {
         this.bStatus = bStatus;
     }
 
-    public FlashScreen(String sText, int iMaxValue, float heightFactor)
-    {
+    public FlashScreen(String sText, int iMaxValue, float heightFactor) {
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         getContentPane().setLayout(null);
         jpProgressBar = new JPanel();
@@ -50,16 +44,16 @@ public class FlashScreen extends JWindow
 
         JLabel jlblLogo = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/MainBig.jpg")));
 
-        jpProgressBar.setSize(350,275);
-        jpProgressBar.setLocation(0,0);
+        jpProgressBar.setSize(350, 275);
+        jpProgressBar.setLocation(0, 0);
         jpProgressBar.add(jlblLogo);
 
         jpbBar = new JProgressBar(0, 100);
 
-        jpbBar.setSize(350,25);
-        jpbBar.setLocation(0,275);
+        jpbBar.setSize(350, 25);
+        jpbBar.setLocation(0, 275);
         jpbBar.setBackground(new Color(204, 204, 204));
-        jpbBar.setFont(new Font("ARIAL", Font.BOLD, (int) (10 *heightFactor)));
+        jpbBar.setFont(new Font("ARIAL", Font.BOLD, (int) (10 * heightFactor)));
 
         getContentPane().add(jpProgressBar);
         getContentPane().add(jpbBar);
@@ -68,23 +62,20 @@ public class FlashScreen extends JWindow
 
     }
 
-    public void fSetText(String sText)
-    {
+    public void fSetText(String sText) {
         jpbBar.setString(sText);
         jpbBar.setStringPainted(true);
         jpbBar.validate();
     }
 
-    public void fSetValue(int value)
-    {
+    public void fSetValue(int value) {
         iValue = value;
         jpbBar.setString(sProgressText);
         jpbBar.setValue(iValue);
         jpbBar.setStringPainted(true);
         jpbBar.validate();
 
-        if (iValue == 100)
-        {
+        if (iValue == 100) {
             this.setCursor(new Cursor(Cursor.CUSTOM_CURSOR));
         }
     }

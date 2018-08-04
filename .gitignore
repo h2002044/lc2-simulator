@@ -3,6 +3,7 @@
 
 # IntelliJ Idea files
 *.iml
+.idea
 
 # Log file
 *.log

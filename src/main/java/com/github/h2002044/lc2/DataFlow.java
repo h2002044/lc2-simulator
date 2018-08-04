@@ -2,8 +2,7 @@ package com.github.h2002044.lc2;
 
 import java.awt.*;
 
-public class DataFlow
-{
+public class DataFlow {
     private Processor objProcessor_Dataflow = new Processor();
 
     Color pastColor = Color.lightGray;
@@ -18,21 +17,17 @@ public class DataFlow
     private Circuit objSimulate;
     private FlowSummary objExecutionSummary;
 
-    public DataFlow(Circuit objSimulate, FlowSummary objExecutionSummary)
-    {
+    public DataFlow(Circuit objSimulate, FlowSummary objExecutionSummary) {
         this.objSimulate = objSimulate;
         this.objExecutionSummary = objExecutionSummary;
     }
 
-    public void fSetPastProcessColor()
-    {
-
+    public void fSetPastProcessColor() {
 
 
     }
 
-    public void fFetch()
-    {   /*   During the micro Instruction*/
+    public void fFetch() {   /*   During the micro Instruction*/
 
         /*First the Control logic is Activated*/
 
@@ -264,20 +259,15 @@ public class DataFlow
         objSimulate.drawControlLogic(objSimulate.getGraphics());
     }
 
-    private void makeDelay(long time)
-    {
-        try
-        {
+    private void makeDelay(long time) {
+        try {
             Thread.sleep(time);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
 
         }
     }
 
-    public void fDecode()
-    {
+    public void fDecode() {
         makeDelay(SECOND);
 
 
@@ -302,8 +292,7 @@ public class DataFlow
 
     }
 
-    public void fEvaluateAddress()
-    {
+    public void fEvaluateAddress() {
         objSimulate.objFP.cControlLogicFill = presentColor;
         objSimulate.objFP.cControlLogicOutline = presentOutlineColor;
 
@@ -323,10 +312,9 @@ public class DataFlow
 
     }
 
-    public void fFetchOperandsforMemory()
-    {
+    public void fFetchOperandsforMemory() {
         //fFetch();
-/*   During the micro Instruction*/
+        /*   During the micro Instruction*/
 
         objSimulate.objFP.cControlLogicFill = presentColor;
         objSimulate.objFP.cControlLogicOutline = presentOutlineColor;
@@ -422,7 +410,6 @@ public class DataFlow
         objSimulate.drawMAR(objSimulate.getGraphics());
 
 
-
         objSimulate.objFP.cBus2MARFill = pastColor;
         objSimulate.objFP.cBus2MAROutline = pastOutlineColor;
         objSimulate.bus2MAR(objSimulate.getGraphics());
@@ -483,8 +470,7 @@ public class DataFlow
     }
 
 
-    public void fFetchOperandsforReg(int registerNo)
-    {
+    public void fFetchOperandsforReg(int registerNo) {
         objSimulate.objFP.cControlLogicFill = presentColor;
         objSimulate.objFP.cControlLogicOutline = presentOutlineColor;
         objSimulate.drawControlLogic(objSimulate.getGraphics());
@@ -502,18 +488,14 @@ public class DataFlow
     }
 
 
-    public void fExecuteforAlu(int desRegValue, int sourceReg1, int sourceReg2)
-    {
+    public void fExecuteforAlu(int desRegValue, int sourceReg1, int sourceReg2) {
 
-        if (sourceReg2 <= 7)
-        {
+        if (sourceReg2 <= 7) {
             this.fHighlightReg(sourceReg1);
             this.fHighlightReg2ALU(false);
             this.fHighlightReg(sourceReg2);
             this.fHighlightReg2ALU(false);
-        }
-        else
-        {
+        } else {
             if (sourceReg2 >= 0)
                 this.fDrawIR2ALU();
 
@@ -527,10 +509,8 @@ public class DataFlow
     }
 
 
-    private void fDrawALU2reg(int reg)
-    {
-        try
-        {
+    private void fDrawALU2reg(int reg) {
+        try {
 
             objSimulate.objFP.cALUFill = presentColor;
             objSimulate.objFP.cALUOutline = presentOutlineColor;
@@ -581,19 +561,15 @@ public class DataFlow
             this.fHighlightReg(reg);
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
-    private void fDrawIR2ALU()
-    {
-        try
-        {
+    private void fDrawIR2ALU() {
+        try {
             objSimulate.objFP.cIRFill = presentColor;
             objSimulate.objFP.cIROutline = presentOutlineColor;
             objSimulate.drawInstructionRegister(objSimulate.getGraphics());
@@ -653,39 +629,33 @@ public class DataFlow
             //objSimulate.objFP.c
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public void fHighlightReg(int reg)
-    {
-        objSimulate.objFP.setRegisterFill(reg,presentColor);
-        objSimulate.objFP.setRegisterOutline(reg,presentOutlineColor);
-        objSimulate.fDrawRegister(reg,objSimulate.getGraphics());
+    public void fHighlightReg(int reg) {
+        objSimulate.objFP.setRegisterFill(reg, presentColor);
+        objSimulate.objFP.setRegisterOutline(reg, presentOutlineColor);
+        objSimulate.fDrawRegister(reg, objSimulate.getGraphics());
 
         makeDelay(SECOND);
 
-        objSimulate.objFP.setRegisterFill(reg,pastColor);
-        objSimulate.objFP.setRegisterOutline(reg,pastOutlineColor);
-        objSimulate.fDrawRegister(reg,objSimulate.getGraphics());
+        objSimulate.objFP.setRegisterFill(reg, pastColor);
+        objSimulate.objFP.setRegisterOutline(reg, pastOutlineColor);
+        objSimulate.fDrawRegister(reg, objSimulate.getGraphics());
     }
 
 
-    public void fExecuteforSTI(int regValue)
-    {
+    public void fExecuteforSTI(int regValue) {
 
 
     }
 
 
-    public void fExecuterforSTR(int reg1, int reg2)
-    {
-        try
-        {
+    public void fExecuterforSTR(int reg1, int reg2) {
+        try {
             fHighlightReg(reg2);
 
             // fHighlightReg2MAR();
@@ -782,19 +752,15 @@ public class DataFlow
             objSimulate.MAR2Memory(objSimulate.getGraphics());
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
-    public void ExecuteforLEA(int reg)
-    {
-        try
-        {
+    public void ExecuteforLEA(int reg) {
+        try {
             this.fHighlightIR2AT();
             makeDelay(SECOND);
 
@@ -850,19 +816,15 @@ public class DataFlow
             objSimulate.bus2Register(objSimulate.getGraphics());
 
             this.fHighlightReg(reg);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public void fExecuteforLDR(int reg1, int reg2)
-    {
+    public void fExecuteforLDR(int reg1, int reg2) {
 
-        try
-        {
+        try {
 
             fHighlightReg(reg2);
 
@@ -933,15 +895,12 @@ public class DataFlow
 
 
             this.fDrawMDR2REG(reg1);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void fHighlightReg2MAR() throws InterruptedException
-    {
+    private void fHighlightReg2MAR() throws InterruptedException {
         fHighlightreg2Plus();
 
         fDrawPLus2Mar();
@@ -949,8 +908,7 @@ public class DataFlow
 
     }
 
-    private void fDrawPLus2Mar() throws InterruptedException
-    {
+    private void fDrawPLus2Mar() throws InterruptedException {
         objSimulate.objFP.cPlus2MarMuxFill = presentColor;
         objSimulate.objFP.cPlus2MarMuxOutline = presentOutlineColor;
         objSimulate.plus2MarMux(objSimulate.getGraphics());
@@ -999,8 +957,7 @@ public class DataFlow
         this.fDrawBus2Mar();
     }
 
-    private void fHighlightreg2Plus() throws InterruptedException
-    {
+    private void fHighlightreg2Plus() throws InterruptedException {
         objSimulate.objFP.cReg2PCMuxFill = presentColor;
         objSimulate.objFP.cReg2PCMuxOutline = presentOutlineColor;
         objSimulate.reg2PCMux(objSimulate.getGraphics());
@@ -1036,10 +993,8 @@ public class DataFlow
     }
 
 
-    public void fExecuteforLD(int regValue)
-    {
-        try
-        {
+    public void fExecuteforLD(int regValue) {
+        try {
 
             objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
             objExecutionSummary.fAddHeadingText("\nE X E C U T E  O P E R A T I O N -- BEGIN");
@@ -1096,18 +1051,14 @@ public class DataFlow
             objExecutionSummary.fAddHeadingText("\nE X E C U T E  O P E R A T I O N -- END");
             objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    private void fDrawMDR2REG(int reg)
-    {
-        try
-        {
+    private void fDrawMDR2REG(int reg) {
+        try {
             objSimulate.objFP.cBUSFill = presentColor;
             objSimulate.objFP.cBUSOutline = presentOutlineColor;
             objSimulate.drawBUS(objSimulate.getGraphics());
@@ -1132,19 +1083,15 @@ public class DataFlow
             this.fHighlightReg(reg);
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
 
-    public void fExecuteforST(int regValue)
-    {
+    public void fExecuteforST(int regValue) {
 
-        try
-        {
+        try {
 
             objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
             objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
@@ -1152,7 +1099,7 @@ public class DataFlow
 
             fExecuteforMemory();
 
-            objExecutionSummary.fAddText("Stores contents of R"+regValue+"in the Memory");
+            objExecutionSummary.fAddText("Stores contents of R" + regValue + "in the Memory");
             fDrawBus2Mar();
             makeDelay(SECOND);
             //fDrawMar2memory();
@@ -1180,15 +1127,12 @@ public class DataFlow
             objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N-- END");
             objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void fDrawMar2memory() throws InterruptedException
-    {
+    private void fDrawMar2memory() throws InterruptedException {
         objSimulate.objFP.cMARFill = presentColor;
         objSimulate.objFP.cMAROutline = presentOutlineColor;
         objSimulate.drawMAR(objSimulate.getGraphics());
@@ -1227,8 +1171,7 @@ public class DataFlow
         objSimulate.drawMemory(objSimulate.getGraphics());
     }
 
-    private void fDrawBus2Mar() throws InterruptedException
-    {
+    private void fDrawBus2Mar() throws InterruptedException {
         objSimulate.objFP.cBus2MARFill = presentColor;
         objSimulate.objFP.cBus2MAROutline = presentOutlineColor;
         objSimulate.bus2MAR(objSimulate.getGraphics());
@@ -1243,10 +1186,8 @@ public class DataFlow
 
     }
 
-    private void fExecuteRegister2Memory()
-    {
-        try
-        {
+    private void fExecuteRegister2Memory() {
+        try {
             objSimulate.objFP.cReg2ALU_2_Fill = presentColor;
             objSimulate.objFP.cReg2ALU_2_Outline = presentOutlineColor;
             objSimulate.reg2ALU_2(objSimulate.getGraphics());
@@ -1299,15 +1240,12 @@ public class DataFlow
 
             fDrawMDR2Memory();
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void fDrawMDR2Memory() throws InterruptedException
-    {
+    private void fDrawMDR2Memory() throws InterruptedException {
 
         objSimulate.objFP.cMDRFill = presentColor;
         objSimulate.objFP.cMDROutline = presentOutlineColor;
@@ -1343,10 +1281,8 @@ public class DataFlow
     }
 
 
-    public void fExecuteforMemory()
-    {
-        try
-        {
+    public void fExecuteforMemory() {
+        try {
 
 
             //objExecutionSummary.fAddText("\nExecute for memory");
@@ -1401,15 +1337,12 @@ public class DataFlow
             objSimulate.drawBUS(objSimulate.getGraphics());
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void fHighlightIR2AT() throws InterruptedException
-    {
+    private void fHighlightIR2AT() throws InterruptedException {
         objSimulate.objFP.cIRFill = presentColor;
         objSimulate.objFP.cIROutline = presentOutlineColor;
         objSimulate.drawInstructionRegister(objSimulate.getGraphics());
@@ -1473,12 +1406,11 @@ public class DataFlow
     }
 
 
-    public void fExecuteforRet()
-    {
-        try{
+    public void fExecuteforRet() {
+        try {
             this.fHighlightReg(7);
             objSimulate.objFP.cReg2PCMuxFill = presentColor;
-            objSimulate.objFP.cReg2PCMuxOutline= presentOutlineColor;
+            objSimulate.objFP.cReg2PCMuxOutline = presentOutlineColor;
             objSimulate.reg2PCMux(objSimulate.getGraphics());
 
 
@@ -1486,48 +1418,47 @@ public class DataFlow
 
 
             objSimulate.objFP.cReg2PCMuxFill = pastColor;
-            objSimulate.objFP.cReg2PCMuxOutline= pastOutlineColor;
+            objSimulate.objFP.cReg2PCMuxOutline = pastOutlineColor;
             objSimulate.reg2PCMux(objSimulate.getGraphics());
 
             objSimulate.objFP.cPCMuxFill = presentColor;
-            objSimulate.objFP.cPCMuxOutline= presentOutlineColor;
+            objSimulate.objFP.cPCMuxOutline = presentOutlineColor;
             objSimulate.drawPC_MUX(objSimulate.getGraphics());
 
             Thread.sleep(SECOND);
 
             objSimulate.objFP.cPCMuxFill = pastColor;
-            objSimulate.objFP.cPCMuxOutline= pastOutlineColor;
+            objSimulate.objFP.cPCMuxOutline = pastOutlineColor;
             objSimulate.drawPC_MUX(objSimulate.getGraphics());
 
             objSimulate.objFP.cPCMux2PCFill = presentColor;
-            objSimulate.objFP.cPCMux2PCOutline= presentOutlineColor;
+            objSimulate.objFP.cPCMux2PCOutline = presentOutlineColor;
             objSimulate.PCMux2PC(objSimulate.getGraphics());
 
             Thread.sleep(SECOND);
 
             objSimulate.objFP.cPCMux2PCFill = pastColor;
-            objSimulate.objFP.cPCMux2PCOutline= pastOutlineColor;
+            objSimulate.objFP.cPCMux2PCOutline = pastOutlineColor;
             objSimulate.PCMux2PC(objSimulate.getGraphics());
 
             objSimulate.objFP.cPCFill = presentColor;
-            objSimulate.objFP.cPCOutline= presentOutlineColor;
+            objSimulate.objFP.cPCOutline = presentOutlineColor;
             objSimulate.drawProgramCounter(objSimulate.getGraphics());
 
             Thread.sleep(SECOND);
 
             objSimulate.objFP.cPCFill = presentColor;
-            objSimulate.objFP.cPCOutline= presentOutlineColor;
+            objSimulate.objFP.cPCOutline = presentOutlineColor;
             objSimulate.drawProgramCounter(objSimulate.getGraphics());
 
-        }catch(Exception e){e.printStackTrace();}
-     }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void fExecuteforPC(boolean storePC)
-    {
-        try
-        {
-            if (storePC == true)
-            {
+    public void fExecuteforPC(boolean storePC) {
+        try {
+            if (storePC == true) {
                 objSimulate.objFP.cPCFill = presentColor;
                 objSimulate.objFP.cPCOutline = presentOutlineColor;
                 objSimulate.drawProgramCounter(objSimulate.getGraphics());
@@ -1570,7 +1501,7 @@ public class DataFlow
                 objSimulate.bus2Register(objSimulate.getGraphics());
 
                 this.fHighlightReg(7);
-             }
+            }
 
             this.fHighlightIR2AT();
 
@@ -1618,9 +1549,7 @@ public class DataFlow
 
             objSimulate.drawProgramCounter(objSimulate.getGraphics());
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1632,18 +1561,14 @@ public class DataFlow
     }
 
 
-    public void fSetPC()
-    {
+    public void fSetPC() {
         objSimulate.objFP.cPCFill = presentColor;
         objSimulate.objFP.cPCOutline = presentOutlineColor;
 
-        try
-        {
+        try {
 
             Thread.sleep(1000);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1652,10 +1577,8 @@ public class DataFlow
 
     }
 
-    public void fSetFlags(boolean N, boolean Z, boolean P)
-    {
-        if (N == true)
-        {
+    public void fSetFlags(boolean N, boolean Z, boolean P) {
+        if (N == true) {
             objSimulate.objFP.cNegativeFill = presentColor;
             objSimulate.objFP.cNegativeOutline = presentOutlineColor;
             makeDelay(1000);
@@ -1664,8 +1587,7 @@ public class DataFlow
             objSimulate.objFP.cNegativeOutline = pastOutlineColor;
         }
 
-        if (Z == true)
-        {
+        if (Z == true) {
             objSimulate.objFP.cNegativeFill = presentColor;
             objSimulate.objFP.cNegativeOutline = presentOutlineColor;
 
@@ -1675,8 +1597,7 @@ public class DataFlow
             objSimulate.objFP.cNegativeOutline = pastOutlineColor;
         }
 
-        if (P == true)
-        {
+        if (P == true) {
             objSimulate.objFP.cNegativeFill = presentColor;
             objSimulate.objFP.cNegativeOutline = presentOutlineColor;
             makeDelay(1000);
@@ -1688,12 +1609,9 @@ public class DataFlow
 
     }
 
-    private boolean fHighlightReg2ALU(boolean firstpath)
-    {
-        try
-        {
-            if (firstpath == false)
-            {
+    private boolean fHighlightReg2ALU(boolean firstpath) {
+        try {
+            if (firstpath == false) {
                 objSimulate.objFP.cReg2ALU_1_Fill = presentColor;
                 objSimulate.objFP.cReg2ALU_1_Outline = presentOutlineColor;
                 objSimulate.reg2ALU_1(objSimulate.getGraphics());
@@ -1705,9 +1623,7 @@ public class DataFlow
                 objSimulate.reg2ALU_1(objSimulate.getGraphics());
 
                 firstpath = true;
-            }
-            else
-            {
+            } else {
                 objSimulate.objFP.cReg2ALUInputFill = presentColor;
                 objSimulate.objFP.cReg2ALUInputOutline = presentOutlineColor;
                 objSimulate.register2ALUInput(objSimulate.getGraphics());
@@ -1752,25 +1668,19 @@ public class DataFlow
             }
 
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
 
-        }
-        finally
-        {
+        } finally {
             return firstpath;
         }
     }
 
-    public Processor getObjProcessor_Dataflow()
-    {
+    public Processor getObjProcessor_Dataflow() {
         return objProcessor_Dataflow;
     }
 
-    public void setObjProcessor_Dataflow(Processor objProcessor_Dataflow)
-    {
+    public void setObjProcessor_Dataflow(Processor objProcessor_Dataflow) {
         this.objProcessor_Dataflow = objProcessor_Dataflow;
     }
 }

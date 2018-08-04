@@ -2,12 +2,9 @@ package com.github.h2002044.lc2;
 
 import java.awt.*;
 
-public class FlowProperties
-{
-    public void setRegisterOutline(int registerNo, Color outlineColor)
-    {
-        switch(registerNo)
-        {
+public class FlowProperties {
+    public void setRegisterOutline(int registerNo, Color outlineColor) {
+        switch (registerNo) {
             case 0:
                 cRegister00Outline = outlineColor;
                 break;
@@ -36,10 +33,8 @@ public class FlowProperties
 
     }
 
-    public void setRegisterFill(int registerNo, Color fillColor)
-    {
-        switch(registerNo)
-        {
+    public void setRegisterFill(int registerNo, Color fillColor) {
+        switch (registerNo) {
             case 0:
                 cRegister00Fill = fillColor;
                 break;

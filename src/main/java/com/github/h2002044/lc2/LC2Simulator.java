@@ -1,15 +1,17 @@
 package com.github.h2002044.lc2;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
 
-public class LC2Simulator
-{
+public class LC2Simulator {
 
     Input objInput;
 
-    public LC2Simulator()
-    {
+    public LC2Simulator() {
         objInput = new Input();
         objInput.setSize(1200, 750);
         objInput.setBounds(0, 0, 1000, 750);
@@ -19,23 +21,19 @@ public class LC2Simulator
 
     /**
      * main function to start the application
-     *
      */
 
-    public static void main(String a[])
-    {
+    public static void main(String a[]) {
         LC2Simulator objCOMPUTER = new LC2Simulator();
     }
 }
-
 
 
 /**
  * Class Execute does the execution of individual instructions specified by the programmer.
  */
 
-class Execute extends Thread
-{
+class Execute extends Thread {
 
     Processor objProcessor;
 
@@ -49,66 +47,54 @@ class Execute extends Thread
     public static int iThreadNo = 1;
 
 
-    public Execute()
-    {
+    public Execute() {
         objProcessor = new Processor();
     }
 
-    public void Program()
-    {
+    public void Program() {
         String strInput = "";
         System.out.print("Location:");
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
-        try
-        {
+        try {
             BigInteger x = new BigInteger(rd.readLine());
 
             BigInteger opcode = BigInteger.ONE;
-            while (true)
-            {
+            while (true) {
                 System.out.print("\n" + x + ":\t");
                 strInput = rd.readLine();
 
-                if ((strInput.equalsIgnoreCase("EXIT")))
-                {
+                if ((strInput.equalsIgnoreCase("EXIT"))) {
                     opcode = new BigInteger("1111111111111111", 2);
                     objProcessor.putData(opcode, x);
                     x = x.add(BigInteger.ONE);
                     break;
-                }
-                else
-                {
+                } else {
                     opcode = new BigInteger(strInput, 2);
                     objProcessor.putData(opcode, x);
                     x = x.add(BigInteger.ONE);
                 }
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println(e.toString());
 
         }
     }
 
     /* MODIFIED-JAGADISH */
-    public void fopCode(String opcode, BigInteger PC, SimulatorPanel objExecute)
-    {
-        try
-        {
+    public void fopCode(String opcode, BigInteger PC, SimulatorPanel objExecute) {
+        try {
             objExecute.objDataFlow.fDecode();
 
-            objExecute.objExecutionSummary.fAddText("\nThe Code Decoded is " + (new BigInteger(opcode.substring(0, 4), 2)).toString(16).toUpperCase()+"(Hex)");
+            objExecute.objExecutionSummary.fAddText("\nThe Code Decoded is " + (new BigInteger(opcode.substring(0, 4), 2)).toString(16).toUpperCase() + "(Hex)");
             objExecute.objExecutionSummary.fAddHeadingText("\nD E C O D E   I N S T R U C T I O N -- END");
             objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
 
             BigInteger tempOpcode = new BigInteger(opcode.substring(0, 4), 2);
-            switch (tempOpcode.intValue())
-            {
+            switch (tempOpcode.intValue()) {
                 case 0:
-                    boolean N = false,Z = false,P = false;
+                    boolean N = false, Z = false, P = false;
                     if (opcode.charAt(4) == '1')
                         N = true;
                     if (opcode.charAt(5) == '1')
@@ -120,18 +106,13 @@ class Execute extends Thread
                     break;
 
                 case 1:
-                    if (opcode.charAt(10) == '1')
-                    {
+                    if (opcode.charAt(10) == '1') {
                         objProcessor.AddI(new BigInteger(opcode.substring(4, 7), 2), new BigInteger(opcode.substring(7, 10), 2), new BigInteger(opcode.substring(11), 2));
                         break;
-                    }
-                    else if (opcode.charAt(10) == '0')
-                    {
+                    } else if (opcode.charAt(10) == '0') {
                         objProcessor.AddR(new BigInteger(opcode.substring(4, 7), 2), new BigInteger(opcode.substring(7, 10), 2), new BigInteger(opcode.substring(13), 2));
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Error in parsing ADD operation");
                         break;
                     }
@@ -149,18 +130,13 @@ class Execute extends Thread
                     objProcessor.JSR(L, new BigInteger(opcode.substring(7), 2), PC.subtract(BigInteger.ONE));
                     break;
                 case 5:
-                    if (opcode.charAt(10) == '1')
-                    {
+                    if (opcode.charAt(10) == '1') {
                         objProcessor.fANDI(new BigInteger(opcode.substring(4, 7), 2), new BigInteger(opcode.substring(7, 10), 2), new BigInteger(opcode.substring(11), 2));
                         break;
-                    }
-                    else if (opcode.charAt(10) == '0')
-                    {
+                    } else if (opcode.charAt(10) == '0') {
                         objProcessor.fANDR(new BigInteger(opcode.substring(4, 7), 2), new BigInteger(opcode.substring(7, 10), 2), new BigInteger(opcode.substring(13), 2));
                         break;
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Error in parsing ADD operation");
                         break;
                     }
@@ -182,7 +158,7 @@ class Execute extends Thread
                 case 12:
                     boolean L1 = false;
                     if (opcode.charAt(4) == '1') L1 = true;
-                    objProcessor.JSRR(L1, new BigInteger(opcode.substring(7,10), 2),new BigInteger(opcode.substring(10,16),2));
+                    objProcessor.JSRR(L1, new BigInteger(opcode.substring(7, 10), 2), new BigInteger(opcode.substring(10, 16), 2));
                     break;
                 case 13:
                     objProcessor.RET();
@@ -196,18 +172,15 @@ class Execute extends Thread
             }
             /* MODIFIED-JAGADISH */
             this.Show(objExecute);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    /* MODIFIED-JAGADISH */
-    public void Exec(BigInteger loc, SimulatorPanel objExecute)
-    {
 
-        try
-        {
+    /* MODIFIED-JAGADISH */
+    public void Exec(BigInteger loc, SimulatorPanel objExecute) {
+
+        try {
             initializeExecutor(objExecute);
 
             System.out.println(loc.toString(16) + " loc in EXEC");
@@ -216,13 +189,11 @@ class Execute extends Thread
             String operand = objProcessor.getData(loc).toString(2);
             String temp = operand;
 
-            for (int i = 0; i < (16 - operand.length()); i++)
-            {
+            for (int i = 0; i < (16 - operand.length()); i++) {
                 temp = "0" + temp;
             }
 
-            while (!(temp.equalsIgnoreCase("1111111111111111") == true))
-            {
+            while (!(temp.equalsIgnoreCase("1111111111111111") == true)) {
                 objExecute.objRegisters.fDisableRegisters();
                 /* MODIFIED-JAGADISH */
                 objExecute.objDataFlow.fFetch();
@@ -240,33 +211,29 @@ class Execute extends Thread
 
                 /* MODIFIED-JAGADISH */
 
-                if (fGetMode().equalsIgnoreCase("STEP") == true)
-                {
+                if (fGetMode().equalsIgnoreCase("STEP") == true) {
                     objExecute.objRegisters.fEnableRegisters();
                     fWait();
                 }
 
-                if (fGetMode().equalsIgnoreCase("RUN") == true)
-                {
+                if (fGetMode().equalsIgnoreCase("RUN") == true) {
 
                 }
 
-                if (fGetMode().equalsIgnoreCase("STOP") == true)
-                {
+                if (fGetMode().equalsIgnoreCase("STOP") == true) {
                     objExecute.objRegisters.fEnableRegisters();
                     break;
                 }
 
 
-
-                objProcessor.writeContents(Processor.R0,objExecute.objRegisters.fGetRegisterValue(Processor.R0));
-                objProcessor.writeContents(Processor.R1,objExecute.objRegisters.fGetRegisterValue(Processor.R1));
-                objProcessor.writeContents(Processor.R2,objExecute.objRegisters.fGetRegisterValue(Processor.R2));
-                objProcessor.writeContents(Processor.R3,objExecute.objRegisters.fGetRegisterValue(Processor.R3));
-                objProcessor.writeContents(Processor.R4,objExecute.objRegisters.fGetRegisterValue(Processor.R4));
-                objProcessor.writeContents(Processor.R5,objExecute.objRegisters.fGetRegisterValue(Processor.R5));
-                objProcessor.writeContents(Processor.R6,objExecute.objRegisters.fGetRegisterValue(Processor.R6));
-                objProcessor.writeContents(Processor.R7,objExecute.objRegisters.fGetRegisterValue(Processor.R7));
+                objProcessor.writeContents(Processor.R0, objExecute.objRegisters.fGetRegisterValue(Processor.R0));
+                objProcessor.writeContents(Processor.R1, objExecute.objRegisters.fGetRegisterValue(Processor.R1));
+                objProcessor.writeContents(Processor.R2, objExecute.objRegisters.fGetRegisterValue(Processor.R2));
+                objProcessor.writeContents(Processor.R3, objExecute.objRegisters.fGetRegisterValue(Processor.R3));
+                objProcessor.writeContents(Processor.R4, objExecute.objRegisters.fGetRegisterValue(Processor.R4));
+                objProcessor.writeContents(Processor.R5, objExecute.objRegisters.fGetRegisterValue(Processor.R5));
+                objProcessor.writeContents(Processor.R6, objExecute.objRegisters.fGetRegisterValue(Processor.R6));
+                objProcessor.writeContents(Processor.R7, objExecute.objRegisters.fGetRegisterValue(Processor.R7));
 
                 BigInteger biPCValue = objProcessor.readContents(Processor.PC);
                 biPCValue = biPCValue.subtract(BigInteger.ONE);
@@ -279,34 +246,27 @@ class Execute extends Thread
                 operand = objProcessor.getData(objProcessor.readContents(Processor.PC)).toString(2);
 
                 temp = operand;
-                for (int i = 0; i < (16 - operand.length()); i++)
-                {
+                for (int i = 0; i < (16 - operand.length()); i++) {
                     temp = "0" + temp;
                 }
-             }
+            }
             objExecute.objRegisters.fEnableRegisters();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-     }
-    private void makeDelay(int iMilliSec)
-    {
-        iMilliSec = iMilliSec > 0 ? iMilliSec : 500;
-
-        try
-        {
-            Thread.sleep(iMilliSec);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void initializeExecutor(SimulatorPanel objExecute)
-    {
+    private void makeDelay(int iMilliSec) {
+        iMilliSec = iMilliSec > 0 ? iMilliSec : 500;
+
+        try {
+            Thread.sleep(iMilliSec);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initializeExecutor(SimulatorPanel objExecute) {
         System.out.println("Execute : " + objExecute);
         objExecute.objExecutionSummary.jtpSummary.setText("");
         objExecute.objRegisters.fResetRegisters();
@@ -314,60 +274,42 @@ class Execute extends Thread
         objExecute.objOutputSummary.addText("  R0  \t  R1  \t  R2  \t  R3  \t  R4  \t  R5  \t  R6  \t  R7  \t  PC  \t  N  \t  Z  \t  P  \n\n");
     }
 
-    public void fSetMode(String sMode)
-    {
-        if (sMode.equalsIgnoreCase("STOP") == true)
-        {
+    public void fSetMode(String sMode) {
+        if (sMode.equalsIgnoreCase("STOP") == true) {
             this.setMode("STOP");
-        }
-        else if (sMode.equalsIgnoreCase("STEP") == true)
-        {
+        } else if (sMode.equalsIgnoreCase("STEP") == true) {
             this.setMode("STEP");
-        }
-        else if (sMode.equalsIgnoreCase("RUN") == true)
-        {
+        } else if (sMode.equalsIgnoreCase("RUN") == true) {
             this.setMode("RUN");
-        }
-        else if (sMode.equalsIgnoreCase("MICROSTEP") == true)
-        {
+        } else if (sMode.equalsIgnoreCase("MICROSTEP") == true) {
             this.setMode("MICROSTEP");
         }
 
     }
 
-    public String fGetMode()
-    {
+    public String fGetMode() {
         return getMode();
     }
 
-    public synchronized void fNotify()
-    {
-        try
-        {
+    public synchronized void fNotify() {
+        try {
             notifyAll();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized void fWait()
-    {
-        try
-        {
+    public synchronized void fWait() {
+        try {
             Thread.currentThread().wait();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     /* MODIFIED-JAGADISH */
-    public void Show(SimulatorPanel objExecute)
-    {
+    public void Show(SimulatorPanel objExecute) {
 
         System.out.println("R0\t\tR1\t\tR2\t\tR3\t\tR4\t\tR5\t\tR6\t\tR7\t\tPC\t\tSP\t\tN\tZ\tP");
         System.out.println(objProcessor.readContents(Processor.R0).intValue() + "\t\t" +
@@ -375,9 +317,9 @@ class Execute extends Thread
                 "\t\t" + objProcessor.readContents(Processor.R3).intValue() + "\t\t" + objProcessor.readContents(Processor.R4).intValue() +
                 "\t\t" + objProcessor.readContents(Processor.R5).intValue() + "\t\t" + objProcessor.readContents(Processor.R6).intValue() +
                 "\t\t" + objProcessor.readContents(Processor.R7).intValue() + "\t\t" + objProcessor.readContents(Processor.PC).intValue() +
-                "\t\t" + objProcessor.MovFromSP().intValue() + "\t\t" + objProcessor.FlagValue(Alu.NEGATIVE)+ "\t" +
-                objProcessor.FlagValue(Alu.ZERO) +
-                "\t" + objProcessor.FlagValue(Alu.POSITIVE));
+                "\t\t" + objProcessor.MovFromSP().intValue() + "\t\t" + objProcessor.FlagValue(ALU.NEGATIVE) + "\t" +
+                objProcessor.FlagValue(ALU.ZERO) +
+                "\t" + objProcessor.FlagValue(ALU.POSITIVE));
 
         String sRegisters[] = new String[9];
         sRegisters[Processor.R0] = objProcessor.readContents(Processor.R0).toString(16);
@@ -391,25 +333,19 @@ class Execute extends Thread
         sRegisters[Processor.PC] = objProcessor.readContents(Processor.PC).toString(16);
 
 
-        for (int iLoop = 0; iLoop <= 8; iLoop++)
-        {
-            if (sRegisters[iLoop].length() == 1)
-            {
+        for (int iLoop = 0; iLoop <= 8; iLoop++) {
+            if (sRegisters[iLoop].length() == 1) {
                 sRegisters[iLoop] = "000" + sRegisters[iLoop];
-            }
-            else if (sRegisters[iLoop].length() == 2)
-            {
+            } else if (sRegisters[iLoop].length() == 2) {
                 sRegisters[iLoop] = "00" + sRegisters[iLoop];
-            }
-            else if (sRegisters[iLoop].length() == 3)
-            {
+            } else if (sRegisters[iLoop].length() == 3) {
                 sRegisters[iLoop] = "0" + sRegisters[iLoop];
             }
         }
         objExecute.objOutputSummary.addText(sRegisters[0] + "\t" + sRegisters[1] + "\t" + sRegisters[2] + "\t" +
                 sRegisters[3] + "\t" + sRegisters[4] + "\t" + sRegisters[5] + "\t" + sRegisters[6] + "\t" +
-                sRegisters[7] + "\t" + sRegisters[8] + "\t" + objProcessor.FlagValue(Alu.NEGATIVE) + "\t" + objProcessor.FlagValue(Alu.ZERO) + "\t" +
-                objProcessor.FlagValue(Alu.POSITIVE) + "\n\n");
+                sRegisters[7] + "\t" + sRegisters[8] + "\t" + objProcessor.FlagValue(ALU.NEGATIVE) + "\t" + objProcessor.FlagValue(ALU.ZERO) + "\t" +
+                objProcessor.FlagValue(ALU.POSITIVE) + "\n\n");
 
         System.out.println("");
 
@@ -428,96 +364,79 @@ class Execute extends Thread
         int iNegative = 0;
         int iZero = 0;
 
-        iNegative = (objProcessor.FlagValue(Alu.NEGATIVE) == true) ?1:0;
-        iZero = (objProcessor.FlagValue(Alu.ZERO) == true) ?1:0;
-        iPositive = (objProcessor.FlagValue(Alu.POSITIVE) == true) ?1:0;
+        iNegative = (objProcessor.FlagValue(ALU.NEGATIVE) == true) ? 1 : 0;
+        iZero = (objProcessor.FlagValue(ALU.ZERO) == true) ? 1 : 0;
+        iPositive = (objProcessor.FlagValue(ALU.POSITIVE) == true) ? 1 : 0;
 
         objExecute.objRegisters.fSetRegisterValue(9, new BigInteger(new Integer(iZero).toString()));
         objExecute.objRegisters.fSetRegisterValue(10, new BigInteger(new Integer(iPositive).toString()));
         objExecute.objRegisters.fSetRegisterValue(11, new BigInteger(new Integer(iNegative).toString()));
     }
 
-    public void run()
-    {
+    public void run() {
         makeDelay(1000);
         Exec(new BigInteger(new Integer(Processor.iStartingLocation).toString()), Processor.objExecute);
 
         Input.setRun(false);
     }
 
-    public void fopenfile(String Filename)
-    {
-        try
-        {
+    public void fopenfile(String Filename) {
+        try {
             File ifileopen = new File(Filename);
             FileWriter ifile_wr = new FileWriter(ifileopen);
             String tempFileData = new String();
             //String strLoc = new String();
-            for (int iloop = 0; iloop <= 65535; iloop++)
-            {
+            for (int iloop = 0; iloop <= 65535; iloop++) {
                 //  strLoc=new Integer(iloop).toString();
                 tempFileData = objProcessor.getData(new BigInteger(new Integer(iloop).toString())).toString(16);
-                if (tempFileData.equalsIgnoreCase("FFFF") == false)
-                {
+                if (tempFileData.equalsIgnoreCase("FFFF") == false) {
                     ifile_wr.write(new Integer(iloop).toString() + "\t" + tempFileData);
 
                 }
             }
             ifile_wr.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int getRegisterSize()
-    {
+    public int getRegisterSize() {
         return iRegisterSize;
     }
 
-    public void setRegisterSize(int iRegisterSize)
-    {
+    public void setRegisterSize(int iRegisterSize) {
         this.iRegisterSize = iRegisterSize;
     }
 
-    public int getCURegisterSize()
-    {
+    public int getCURegisterSize() {
         return iCURegisterSize;
     }
 
-    public void setCURegisterSize(int iCURegisterSize)
-    {
+    public void setCURegisterSize(int iCURegisterSize) {
         this.iCURegisterSize = iCURegisterSize;
     }
 
-    public int getMemorySize()
-    {
+    public int getMemorySize() {
         return iMemorySize;
     }
 
-    public void setMemorySize(int iMemorySize)
-    {
+    public void setMemorySize(int iMemorySize) {
         this.iMemorySize = iMemorySize;
     }
 
-    public int getLocation()
-    {
+    public int getLocation() {
         return iLocation;
     }
 
-    public void setLocation(int iLocation)
-    {
+    public void setLocation(int iLocation) {
         this.iLocation = iLocation;
     }
 
-    public String getMode()
-    {
+    public String getMode() {
         return sMode;
     }
 
-    public void setMode(String sMode)
-    {
+    public void setMode(String sMode) {
         this.sMode = sMode;
     }
 }

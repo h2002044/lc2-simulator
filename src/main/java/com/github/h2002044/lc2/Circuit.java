@@ -3,8 +3,7 @@ package com.github.h2002044.lc2;
 import javax.swing.*;
 import java.awt.*;
 
-public class Circuit extends JPanel
-{
+public class Circuit extends JPanel {
     private int iWidth;
     private int iHeight;
 
@@ -21,8 +20,7 @@ public class Circuit extends JPanel
     Font arialPlain_10_Font = new Font("ARIAL", Font.PLAIN, (int) (10 * heightFactor));
     Font arialBold_12_Font = new Font("ARIAL", Font.BOLD, (int) (12 * heightFactor));
 
-    private void init()
-    {
+    private void init() {
         setLayout(new BorderLayout());
         setBackground(Color.lightGray);
         setToolTipText("D A T A   F L O W   P A T H");
@@ -31,8 +29,7 @@ public class Circuit extends JPanel
         iWidth = dmnScreen.width;
         iHeight = dmnScreen.height;
 
-        if (bPaint == false)
-        {
+        if (bPaint == false) {
             widthFactor = ((float) iWidth / 800);
             heightFactor = ((float) iHeight / 600);
 
@@ -50,8 +47,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawGrid(Graphics g)
-    {
+    private void drawGrid(Graphics g) {
         setBackground(Color.lightGray);
 
         g.setColor(Color.lightGray);
@@ -62,13 +58,11 @@ public class Circuit extends JPanel
 
         g.setColor(new Color(230, 230, 222));
 
-        for (int iLoop = 0; iLoop <= 600 * heightFactor; iLoop = iLoop + (int) (25 * heightFactor))
-        {
+        for (int iLoop = 0; iLoop <= 600 * heightFactor; iLoop = iLoop + (int) (25 * heightFactor)) {
             g.drawLine(0, iLoop, (int) (800 * heightFactor), iLoop);
         }
 
-        for (int iInnerLoop = 0; iInnerLoop <= 800 * widthFactor; iInnerLoop = iInnerLoop + (int) (25 * widthFactor))
-        {
+        for (int iInnerLoop = 0; iInnerLoop <= 800 * widthFactor; iInnerLoop = iInnerLoop + (int) (25 * widthFactor)) {
             g.drawLine(iInnerLoop, 0, iInnerLoop, (int) (600 * widthFactor));
         }
 
@@ -76,8 +70,7 @@ public class Circuit extends JPanel
 
     }
 
-    public void paint(Graphics g)
-    {
+    public void paint(Graphics g) {
         g.setFont(new Font("ARIAL", Font.BOLD, (int) (14 * heightFactor)));
 
         init();
@@ -225,8 +218,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void MAR2Input(Graphics g)
-    {
+    private void MAR2Input(Graphics g) {
         g.setColor(objFP.cMAR2InputOutline);
 
         g.drawLine((int) (245 * widthFactor), (int) (450 * heightFactor), (int) (400 * widthFactor), (int) (450 * heightFactor)); //MAR to Input
@@ -240,8 +232,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (243 * widthFactor), (int) (447 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //MAR
     }
 
-    public void MAR2Memory(Graphics g)
-    {
+    public void MAR2Memory(Graphics g) {
         g.setColor(objFP.cMAR2MemoryOutline);
 
         g.drawLine((int) (200 * widthFactor), (int) (450 * heightFactor), (int) (245 * widthFactor), (int) (450 * heightFactor)); // MAR to Memory
@@ -255,8 +246,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (243 * widthFactor), (int) (447 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //MAR
     }
 
-    public void drawBUS(Graphics g)
-    {
+    public void drawBUS(Graphics g) {
         g.setColor(objFP.cBUSOutline);
 
         g.fillRect((int) (20 * widthFactor), (int) (400 * heightFactor), (int) (700 * widthFactor), (int) (6 * heightFactor));
@@ -281,8 +271,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBUSFill, (int) (10 * widthFactor), (int) (403 * heightFactor), (int) (26 * widthFactor), (int) (395 * heightFactor), (int) (26 * widthFactor), (int) (411 * heightFactor));
     }
 
-    public void MAR_MUX2Bus(Graphics g)
-    {
+    public void MAR_MUX2Bus(Graphics g) {
         g.setColor(objFP.cMarMux2BusOutline);
 
         g.drawLine((int) (70 * widthFactor), (int) (25 * heightFactor), (int) (70 * widthFactor), (int) (70 * heightFactor));  // MARMUX to BUS
@@ -293,8 +282,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cMarMux2BusFill, (int) (70 * widthFactor), (int) (25 * heightFactor), (int) (65 * widthFactor), (int) (35 * heightFactor), (int) (75 * widthFactor), (int) (35 * heightFactor));
     }
 
-    public void reg2ALU_2(Graphics g)
-    {
+    public void reg2ALU_2(Graphics g) {
         g.setColor(objFP.cReg2ALU_2_Outline);
         //ALU INPUT 2
         g.drawLine((int) (455 * widthFactor), (int) (265 * heightFactor), (int) (455 * widthFactor), (int) (300 * heightFactor));
@@ -306,8 +294,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cReg2ALU_2_Fill, (int) (455 * widthFactor), (int) (300 * heightFactor), (int) (450 * widthFactor), (int) (290 * heightFactor), (int) (460 * widthFactor), (int) (290 * heightFactor));
     }
 
-    public void reg2ALU_1(Graphics g)
-    {
+    public void reg2ALU_1(Graphics g) {
         g.setColor(objFP.cReg2ALU_1_Outline);
         //ALU INPUT 1
         g.drawLine((int) (520 * widthFactor), (int) (210 * heightFactor), (int) (520 * widthFactor), (int) (300 * heightFactor));
@@ -321,8 +308,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (517 * widthFactor), (int) (222 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //REG to ALU
     }
 
-    private void bus2CRTSR(Graphics g)
-    {
+    private void bus2CRTSR(Graphics g) {
         g.setColor(objFP.cBus2CRTSROutline);
 
         g.drawLine((int) (630 * widthFactor), (int) (405 * heightFactor), (int) (630 * widthFactor), (int) (430 * heightFactor)); //CRTSR to Bus
@@ -333,8 +319,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2CRTSRFill, (int) (630 * widthFactor), (int) (430 * heightFactor), (int) (625 * widthFactor), (int) (425 * heightFactor), (int) (635 * widthFactor), (int) (425 * heightFactor));
     }
 
-    public void register2ALUInput(Graphics g)
-    {
+    public void register2ALUInput(Graphics g) {
         g.setColor(objFP.cReg2ALUInputOutline);
 
         //input of ALU INPUT 2  from Register
@@ -348,8 +333,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cReg2ALUInputFill, (int) (465 * widthFactor), (int) (250 * heightFactor), (int) (460 * widthFactor), (int) (245 * heightFactor), (int) (470 * widthFactor), (int) (245 * heightFactor));
     }
 
-    private void IR2ControlLogic(Graphics g)
-    {
+    private void IR2ControlLogic(Graphics g) {
         g.setColor(objFP.cIR2ControlLogicOutline);
 
         g.drawLine((int) (75 * widthFactor), (int) (280 * heightFactor), (int) (75 * widthFactor), (int) (310 * heightFactor)); // IR to Control Logic
@@ -360,8 +344,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cIR2ControlLogicFill, (int) (75 * widthFactor), (int) (280 * heightFactor), (int) (70 * widthFactor), (int) (290 * heightFactor), (int) (80 * widthFactor), (int) (290 * heightFactor));
     }
 
-    public void bus2IR(Graphics g)
-    {
+    public void bus2IR(Graphics g) {
         g.setColor(objFP.cBus2IROutline);
         g.drawLine((int) (75 * widthFactor), (int) (400 * heightFactor), (int) (75 * widthFactor), (int) (335 * heightFactor)); //IR input from BUS
         fDrawFilledTriangle(g, objFP.cBus2IROutline, (int) (75 * widthFactor), (int) (335 * heightFactor), (int) (70 * widthFactor), (int) (345 * heightFactor), (int) (80 * widthFactor), (int) (345 * heightFactor));
@@ -371,8 +354,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2IRFill, (int) (75 * widthFactor), (int) (335 * heightFactor), (int) (70 * widthFactor), (int) (345 * heightFactor), (int) (80 * widthFactor), (int) (345 * heightFactor));
     }
 
-    public void bus2MDR(Graphics g)
-    {
+    public void bus2MDR(Graphics g) {
         g.setColor(objFP.cBus2MDROutline);
 
         g.drawLine((int) (75 * widthFactor), (int) (405 * heightFactor), (int) (75 * widthFactor), (int) (420 * heightFactor));   //Bus to MDR IN
@@ -383,8 +365,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2MDRFill, (int) (75 * widthFactor), (int) (420 * heightFactor), (int) (70 * widthFactor), (int) (415 * heightFactor), (int) (80 * widthFactor), (int) (415 * heightFactor));
     }
 
-    public void MDR2Bus(Graphics g)
-    {
+    public void MDR2Bus(Graphics g) {
         g.setColor(objFP.cMDR2BusOutline);
 
         g.drawLine((int) (55 * widthFactor), (int) (405 * heightFactor), (int) (55 * widthFactor), (int) (420 * heightFactor));   //MDR to Bus OUT
@@ -396,8 +377,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cMDR2BusFill, (int) (55 * widthFactor), (int) (405 * heightFactor), (int) (50 * widthFactor), (int) (410 * heightFactor), (int) (60 * widthFactor), (int) (410 * heightFactor));
     }
 
-    public void ALU2Bus(Graphics g)
-    {
+    public void ALU2Bus(Graphics g) {
         g.setColor(objFP.cALU2BusOutline);
         g.drawLine((int) (485 * widthFactor), (int) (330 * heightFactor), (int) (485 * widthFactor), (int) (400 * heightFactor)); //ALU to BUS
         fDrawFilledTriangle(g, objFP.cALU2BusOutline, (int) (485 * widthFactor), (int) (400 * heightFactor), (int) (480 * widthFactor), (int) (390 * heightFactor), (int) (490 * widthFactor), (int) (390 * heightFactor));
@@ -408,8 +388,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cALU2BusFill, (int) (485 * widthFactor), (int) (400 * heightFactor), (int) (480 * widthFactor), (int) (390 * heightFactor), (int) (490 * widthFactor), (int) (390 * heightFactor));
     }
 
-    public void bus2MAR(Graphics g)
-    {
+    public void bus2MAR(Graphics g) {
         g.setColor(objFP.cBus2MAROutline);
         g.drawLine((int) (245 * widthFactor), (int) (405 * heightFactor), (int) (245 * widthFactor), (int) (420 * heightFactor)); //MAR to Bus
         fDrawFilledTriangle(g, objFP.cBus2MAROutline, (int) (245 * widthFactor), (int) (420 * heightFactor), (int) (240 * widthFactor), (int) (415 * heightFactor), (int) (250 * widthFactor), (int) (415 * heightFactor));
@@ -419,8 +398,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2MARFill, (int) (245 * widthFactor), (int) (420 * heightFactor), (int) (240 * widthFactor), (int) (415 * heightFactor), (int) (250 * widthFactor), (int) (415 * heightFactor));
     }
 
-    public void IR2Sext(Graphics g)
-    {
+    public void IR2Sext(Graphics g) {
         g.setColor(objFP.cIR2SextOutline);
         g.drawLine((int) (35 * widthFactor), (int) (210 * heightFactor), (int) (280 * widthFactor), (int) (210 * heightFactor));  // SEXT TO IR Line.
         fDrawFilledTriangle(g, objFP.cIR2SextOutline, (int) (280 * widthFactor), (int) (210 * heightFactor), (int) (275 * widthFactor), (int) (205 * heightFactor), (int) (275 * widthFactor), (int) (215 * heightFactor));
@@ -434,8 +412,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (72 * widthFactor), (int) (297 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //IR to ZEXT
     }
 
-    private void bus2KBSR(Graphics g)
-    {
+    private void bus2KBSR(Graphics g) {
         g.setColor(objFP.cBus2KBSROutline);
 
         g.drawLine((int) (415 * widthFactor), (int) (405 * heightFactor), (int) (415 * widthFactor), (int) (430 * heightFactor));  //Bus 2 KBSR 1
@@ -446,8 +423,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2KBSRFill, (int) (415 * widthFactor), (int) (430 * heightFactor), (int) (410 * widthFactor), (int) (425 * heightFactor), (int) (420 * widthFactor), (int) (425 * heightFactor));
     }
 
-    private void KBSR2Bus(Graphics g)
-    {
+    private void KBSR2Bus(Graphics g) {
         g.setColor(objFP.cKBSR2BusOutline);
         g.drawLine((int) (435 * widthFactor), (int) (405 * heightFactor), (int) (435 * widthFactor), (int) (430 * heightFactor));  //KBSR 2 Bus
         fDrawFilledTriangle(g, objFP.cKBSR2BusOutline, (int) (435 * widthFactor), (int) (405 * heightFactor), (int) (430 * widthFactor), (int) (410 * heightFactor), (int) (440 * widthFactor), (int) (410 * heightFactor));
@@ -457,8 +433,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cKBSR2BusFill, (int) (435 * widthFactor), (int) (405 * heightFactor), (int) (430 * widthFactor), (int) (410 * heightFactor), (int) (440 * widthFactor), (int) (410 * heightFactor));
     }
 
-    private void bus2KBDR(Graphics g)
-    {
+    private void bus2KBDR(Graphics g) {
         g.setColor(objFP.cBus2KBSROutline);
         g.drawLine((int) (495 * widthFactor), (int) (405 * heightFactor), (int) (495 * widthFactor), (int) (430 * heightFactor));  //Bus 2 KBDR
         fDrawFilledTriangle(g, objFP.cBus2KBSROutline, (int) (495 * widthFactor), (int) (405 * heightFactor), (int) (490 * widthFactor), (int) (410 * heightFactor), (int) (500 * widthFactor), (int) (410 * heightFactor));
@@ -469,8 +444,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2KBSRFill, (int) (495 * widthFactor), (int) (405 * heightFactor), (int) (490 * widthFactor), (int) (410 * heightFactor), (int) (500 * widthFactor), (int) (410 * heightFactor));
     }
 
-    private void CRTSR2Bus(Graphics g)
-    {
+    private void CRTSR2Bus(Graphics g) {
         g.setColor(objFP.cCRTSR2BusOutline);
 
         g.drawLine((int) (655 * widthFactor), (int) (405 * heightFactor), (int) (655 * widthFactor), (int) (430 * heightFactor)); //CRTSR to BUS
@@ -481,8 +455,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cCRTSR2BusFill, (int) (655 * widthFactor), (int) (405 * heightFactor), (int) (650 * widthFactor), (int) (410 * heightFactor), (int) (660 * widthFactor), (int) (410 * heightFactor));
     }
 
-    private void bus2CRTDR(Graphics g)
-    {
+    private void bus2CRTDR(Graphics g) {
         g.setColor(objFP.cBus2CRTDROutline);
 
         g.drawLine((int) (575 * widthFactor), (int) (405 * heightFactor), (int) (575 * widthFactor), (int) (430 * heightFactor)); //CRTDR
@@ -494,8 +467,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2CRTDRFill, (int) (575 * widthFactor), (int) (430 * heightFactor), (int) (570 * widthFactor), (int) (425 * heightFactor), (int) (580 * widthFactor), (int) (425 * heightFactor));
     }
 
-    public void bus2Register(Graphics g)
-    {
+    public void bus2Register(Graphics g) {
         g.setColor(objFP.cBus2RegisterOutline);
         g.drawLine((int) (500 * widthFactor), (int) (25 * heightFactor), (int) (500 * widthFactor), (int) (90 * heightFactor));  //REg to Bus
         fDrawFilledTriangle(g, objFP.cBus2RegisterOutline, (int) (500 * widthFactor), (int) (90 * heightFactor), (int) (495 * widthFactor), (int) (80 * heightFactor), (int) (505 * widthFactor), (int) (80 * heightFactor));
@@ -506,8 +478,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2RegisterFill, (int) (500 * widthFactor), (int) (90 * heightFactor), (int) (495 * widthFactor), (int) (80 * heightFactor), (int) (505 * widthFactor), (int) (80 * heightFactor));
     }
 
-    private void logic2Negative(Graphics g)
-    {
+    private void logic2Negative(Graphics g) {
         g.setColor(objFP.cLogic2NegativeOutline);
 
         g.drawLine((int) (183 * widthFactor), (int) (335 * heightFactor), (int) (183 * widthFactor), (int) (375 * heightFactor));   //Negative to Logic
@@ -521,8 +492,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cLogic2NegativeFill, (int) (183 * widthFactor), (int) (335 * heightFactor), (int) (178 * widthFactor), (int) (345 * heightFactor), (int) (188 * widthFactor), (int) (345 * heightFactor));
     }
 
-    private void logic2Zero(Graphics g)
-    {
+    private void logic2Zero(Graphics g) {
         g.setColor(objFP.cLogic2ZeroOutline);
 
         g.drawLine((int) (300 * widthFactor), (int) (365 * heightFactor), (int) (223 * widthFactor), (int) (365 * heightFactor));   //Zero to Logic
@@ -535,8 +505,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cLogic2ZeroFill, (int) (223 * widthFactor), (int) (335 * heightFactor), (int) (218 * widthFactor), (int) (345 * heightFactor), (int) (228 * widthFactor), (int) (345 * heightFactor));
     }
 
-    private void logic2Positive(Graphics g)
-    {
+    private void logic2Positive(Graphics g) {
         g.setColor(objFP.cLogic2PositiveOutline);
         g.drawLine((int) (263 * widthFactor), (int) (335 * heightFactor), (int) (263 * widthFactor), (int) (355 * heightFactor));   //Positive to Logic
         g.drawLine((int) (300 * widthFactor), (int) (355 * heightFactor), (int) (263 * widthFactor), (int) (355 * heightFactor));  //Positive to Logic
@@ -549,8 +518,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cLogic2PositiveFill, (int) (263 * widthFactor), (int) (335 * heightFactor), (int) (258 * widthFactor), (int) (345 * heightFactor), (int) (268 * widthFactor), (int) (345 * heightFactor));
     }
 
-    private void Bus2Logic(Graphics g)
-    {
+    private void Bus2Logic(Graphics g) {
         g.setColor(objFP.cBus2LogicOutline);
 
         g.drawLine((int) (350 * widthFactor), (int) (365 * heightFactor), (int) (375 * widthFactor), (int) (365 * heightFactor));  //Logic to bus
@@ -563,8 +531,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2LogicFill, (int) (350 * widthFactor), (int) (365 * heightFactor), (int) (360 * widthFactor), (int) (370 * heightFactor), (int) (360 * widthFactor), (int) (360 * heightFactor));
     }
 
-    private void Bus2PCMux(Graphics g)
-    {
+    private void Bus2PCMux(Graphics g) {
         g.setColor(objFP.cBus2PCMuxOutline);
 
         g.drawLine((int) (375 * widthFactor), (int) (25 * heightFactor), (int) (375 * widthFactor), (int) (160 * heightFactor));    //PCMUX to bus
@@ -579,8 +546,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cBus2PCMuxFill, (int) (265 * widthFactor), (int) (130 * heightFactor), (int) (260 * widthFactor), (int) (135 * heightFactor), (int) (270 * widthFactor), (int) (135 * heightFactor));
     }
 
-    public void Plus12PCMux(Graphics g)
-    {
+    public void Plus12PCMux(Graphics g) {
         g.setColor(objFP.cPlus_1_2PCOutline);
         g.drawLine((int) (285 * widthFactor), (int) (130 * heightFactor), (int) (285 * widthFactor), (int) (150 * heightFactor));  //PCMUX to +1
         g.drawLine((int) (330 * widthFactor), (int) (150 * heightFactor), (int) (330 * widthFactor), (int) (110 * heightFactor)); //PCMUX to +1
@@ -595,8 +561,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPlus_1_2PCFill, (int) (285 * widthFactor), (int) (130 * heightFactor), (int) (280 * widthFactor), (int) (135 * heightFactor), (int) (290 * widthFactor), (int) (135 * heightFactor));
     }
 
-    public void PCMux2PC(Graphics g)
-    {
+    public void PCMux2PC(Graphics g) {
         g.setColor(objFP.cPCMux2PCOutline);
 
         g.drawLine((int) (265 * widthFactor), (int) (110 * heightFactor), (int) (265 * widthFactor), (int) (90 * heightFactor));   //PC to PCMUX
@@ -607,8 +572,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPCMux2PCFill, (int) (265 * widthFactor), (int) (90 * heightFactor), (int) (260 * widthFactor), (int) (95 * heightFactor), (int) (270 * widthFactor), (int) (95 * heightFactor));
     }
 
-    public void At2PCMux(Graphics g)
-    {
+    public void At2PCMux(Graphics g) {
         g.setColor(objFP.cAt2PCMuxOutline);
 
         g.drawLine((int) (160 * widthFactor), (int) (100 * heightFactor), (int) (160 * widthFactor), (int) (140 * heightFactor));  //@ to PCMUX
@@ -626,8 +590,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (157 * widthFactor), (int) (100 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //@ PCMUX - MARMUX
     }
 
-    public void Memory2MDR(Graphics g)
-    {
+    public void Memory2MDR(Graphics g) {
         g.setColor(objFP.cMemory2MDROutline);
         g.drawLine((int) (55 * widthFactor), (int) (440 * heightFactor), (int) (55 * widthFactor), (int) (465 * heightFactor));    //Memory to MDR
         g.drawLine((int) (55 * widthFactor), (int) (465 * heightFactor), (int) (100 * widthFactor), (int) (465 * heightFactor));  //Memory to MDR
@@ -640,8 +603,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cMemory2MDRFill, (int) (55 * widthFactor), (int) (440 * heightFactor), (int) (50 * widthFactor), (int) (450 * heightFactor), (int) (60 * widthFactor), (int) (450 * heightFactor));
     }
 
-    public void MDR2Memory(Graphics g)
-    {
+    public void MDR2Memory(Graphics g) {
         g.setColor(objFP.cMDR2MemoryOutline);
         g.drawLine((int) (75 * widthFactor), (int) (450 * heightFactor), (int) (100 * widthFactor), (int) (450 * heightFactor));  //MDR to memory
         g.drawLine((int) (75 * widthFactor), (int) (440 * heightFactor), (int) (75 * widthFactor), (int) (450 * heightFactor));  //MDR to Memory
@@ -654,8 +616,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cMDR2MemoryFill, (int) (100 * widthFactor), (int) (450 * heightFactor), (int) (90 * widthFactor), (int) (445 * heightFactor), (int) (90 * widthFactor), (int) (455 * heightFactor));
     }
 
-    private void Mar2Output(Graphics g)
-    {
+    private void Mar2Output(Graphics g) {
         g.setColor(objFP.cMAR2OutputOutline);
         g.drawLine((int) (245 * widthFactor), (int) (440 * heightFactor), (int) (245 * widthFactor), (int) (500 * heightFactor)); //MAR  to Output
         g.drawLine((int) (245 * widthFactor), (int) (500 * heightFactor), (int) (575 * widthFactor), (int) (500 * heightFactor));   // MAR to Output
@@ -672,8 +633,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (243 * widthFactor), (int) (447 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //MAR
     }
 
-    public void IR2At(Graphics g)
-    {
+    public void IR2At(Graphics g) {
         g.setColor(objFP.cIR2AtOutline);
 
         g.drawLine((int) (35 * widthFactor), (int) (225 * heightFactor), (int) (125 * widthFactor), (int) (225 * heightFactor));   //@ to IR
@@ -695,8 +655,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (72 * widthFactor), (int) (297 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //IR to ZEXT
     }
 
-    public void PC2At(Graphics g)
-    {
+    public void PC2At(Graphics g) {
         g.setColor(objFP.cPC2AtOutline);
         g.drawLine((int) (175 * widthFactor), (int) (60 * heightFactor), (int) (265 * widthFactor), (int) (60 * heightFactor));  //@ to PC
         g.drawLine((int) (175 * widthFactor), (int) (60 * heightFactor), (int) (175 * widthFactor), (int) (70 * heightFactor));   //@ to PC
@@ -709,8 +668,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPC2AtFill, (int) (175 * widthFactor), (int) (70 * heightFactor), (int) (170 * widthFactor), (int) (65 * heightFactor), (int) (180 * widthFactor), (int) (65 * heightFactor));
     }
 
-    public void At2MarMux(Graphics g)
-    {
+    public void At2MarMux(Graphics g) {
         g.setColor(objFP.cAt2MarMuxOutline);
         g.drawLine((int) (90 * widthFactor), (int) (90 * heightFactor), (int) (90 * widthFactor), (int) (103 * heightFactor));     // @ , MARMX
         g.drawLine((int) (160 * widthFactor), (int) (103 * heightFactor), (int) (160 * widthFactor), (int) (90 * heightFactor));   // @, MARMX
@@ -728,8 +686,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (157 * widthFactor), (int) (100 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //@ PCMUX - MARMUX
     }
 
-    public void Sext2ALUInput(Graphics g)
-    {
+    public void Sext2ALUInput(Graphics g) {
         g.setColor(objFP.cSext2ALUInputOutline);
         g.drawLine((int) (330 * widthFactor), (int) (210 * heightFactor), (int) (350 * widthFactor), (int) (210 * heightFactor)); // ALU Input 1 to SEXT HL
         g.drawLine((int) (350 * widthFactor), (int) (235 * heightFactor), (int) (350 * widthFactor), (int) (210 * heightFactor)); // ALU Input 1 to SEXT VL
@@ -746,8 +703,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cSext2ALUInputFill, (int) (445 * widthFactor), (int) (250 * heightFactor), (int) (440 * widthFactor), (int) (245 * heightFactor), (int) (450 * widthFactor), (int) (245 * heightFactor));
     }
 
-    public void PC2Plus1(Graphics g)
-    {
+    public void PC2Plus1(Graphics g) {
         g.setColor(objFP.cPC2Plus_1_Outline);
         g.drawLine((int) (265 * widthFactor), (int) (60 * heightFactor), (int) (330 * widthFactor), (int) (60 * heightFactor));  // +1 to PC H L
         g.drawLine((int) (330 * widthFactor), (int) (90 * heightFactor), (int) (330 * widthFactor), (int) (60 * heightFactor));   // +1 to PC V L
@@ -760,8 +716,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPC2Plus_1_Fill, (int) (330 * widthFactor), (int) (90 * heightFactor), (int) (325 * widthFactor), (int) (85 * heightFactor), (int) (335 * widthFactor), (int) (85 * heightFactor));
     }
 
-    public void IR2Zext2(Graphics g)
-    {
+    public void IR2Zext2(Graphics g) {
         g.setColor(objFP.cIR2Zext2Outline);
 
         g.drawLine((int) (95 * widthFactor), (int) (180 * heightFactor), (int) (95 * widthFactor), (int) (190 * heightFactor));  //IR to ZEXT 2 V L
@@ -779,8 +734,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (72 * widthFactor), (int) (297 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //IR to ZEXT
     }
 
-    public void reg2Plus(Graphics g)
-    {
+    public void reg2Plus(Graphics g) {
         g.setColor(objFP.cReg2PlusOutline);
 
         g.drawLine((int) (100 * widthFactor), (int) (150 * heightFactor), (int) (250 * widthFactor), (int) (150 * heightFactor));  // + to PCMUX/ALU/Reg  H L
@@ -798,8 +752,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (517 * widthFactor), (int) (222 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //REG to ALU
     }
 
-    public void reg2PCMux(Graphics g)
-    {
+    public void reg2PCMux(Graphics g) {
         g.setColor(objFP.cReg2PCMuxOutline);
 
         g.drawLine((int) (520 * widthFactor), (int) (225 * heightFactor), (int) (400 * widthFactor), (int) (225 * heightFactor));  // REG/ALU to PCMUX H L
@@ -821,8 +774,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (517 * widthFactor), (int) (222 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //REG to ALU
     }
 
-    public void plus2MarMux(Graphics g)
-    {
+    public void plus2MarMux(Graphics g) {
         g.setColor(objFP.cPlus2MarMuxOutline);
 
         g.drawLine((int) (95 * widthFactor), (int) (120 * heightFactor), (int) (95 * widthFactor), (int) (110 * heightFactor));  // PLUS to MARMUX  V L
@@ -838,8 +790,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPlus2MarMuxFill, (int) (70 * widthFactor), (int) (90 * heightFactor), (int) (65 * widthFactor), (int) (95 * heightFactor), (int) (75 * widthFactor), (int) (95 * heightFactor));
     }
 
-    public void Zext2MarMux(Graphics g)
-    {
+    public void Zext2MarMux(Graphics g) {
         g.setColor(objFP.cZext2MarMuxOutline);
 
         g.drawLine((int) (35 * widthFactor), (int) (110 * heightFactor), (int) (35 * widthFactor), (int) (140 * heightFactor));  // ZEXT to MARMUX  V L
@@ -855,8 +806,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cZext2MarMuxFill, (int) (50 * widthFactor), (int) (90 * heightFactor), (int) (45 * widthFactor), (int) (95 * heightFactor), (int) (55 * widthFactor), (int) (95 * heightFactor));
     }
 
-    public void Zext2Plus(Graphics g)
-    {
+    public void Zext2Plus(Graphics g) {
         g.setColor(objFP.cZext2PlusOutline);
 
         g.drawLine((int) (85 * widthFactor), (int) (140 * heightFactor), (int) (85 * widthFactor), (int) (160 * heightFactor));   //ZEXT TO PLUS
@@ -868,8 +818,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cZext2PlusFill, (int) (85 * widthFactor), (int) (140 * heightFactor), (int) (80 * widthFactor), (int) (145 * heightFactor), (int) (90 * widthFactor), (int) (145 * heightFactor));
     }
 
-    public void IR2Zext_1(Graphics g)
-    {
+    public void IR2Zext_1(Graphics g) {
         g.setColor(objFP.cIR2ZEXT_1BusOutline);
 
         g.drawLine((int) (35 * widthFactor), (int) (160 * heightFactor), (int) (35 * widthFactor), (int) (300 * heightFactor)); // IR to ZEXT 1  - V L
@@ -885,8 +834,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (72 * widthFactor), (int) (297 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor));   //IR to ZEXT
     }
 
-    public void PC2Bus(Graphics g)
-    {
+    public void PC2Bus(Graphics g) {
         g.setColor(objFP.cPC2BusOutline);
 
         g.drawLine((int) (265 * widthFactor), (int) (25 * heightFactor), (int) (265 * widthFactor), (int) (70 * heightFactor));  //PC To BUS
@@ -900,8 +848,7 @@ public class Circuit extends JPanel
         g.fillOval((int) (262 * widthFactor), (int) (57 * heightFactor), (int) (6 * widthFactor), (int) (6 * heightFactor)); //  PC to  BUS
     }
 
-    private void positive2ControlLogic(Graphics g)
-    {
+    private void positive2ControlLogic(Graphics g) {
         g.setColor(objFP.cPositive2ControlLogicOutline);
 
         g.drawLine((int) (263 * widthFactor), (int) (280 * heightFactor), (int) (263 * widthFactor), (int) (310 * heightFactor));  //P  to Control Logic
@@ -913,8 +860,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cPositive2ControlLogicFill, (int) (263 * widthFactor), (int) (280 * heightFactor), (int) (258 * widthFactor), (int) (290 * heightFactor), (int) (268 * widthFactor), (int) (290 * heightFactor));
     }
 
-    private void zero2ControlLogic(Graphics g)
-    {
+    private void zero2ControlLogic(Graphics g) {
         g.setColor(objFP.cZero2ControlLogicOutline);
 
         g.drawLine((int) (223 * widthFactor), (int) (280 * heightFactor), (int) (223 * widthFactor), (int) (310 * heightFactor));  //Z   to Control Logic
@@ -926,8 +872,7 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cZeroControlLogicFill, (int) (223 * widthFactor), (int) (280 * heightFactor), (int) (218 * widthFactor), (int) (290 * heightFactor), (int) (228 * widthFactor), (int) (290 * heightFactor));
     }
 
-    private void negative2ControlLogic(Graphics g)
-    {
+    private void negative2ControlLogic(Graphics g) {
         g.setColor(objFP.cNegative2ControlLogicOutline);
 
         g.drawLine((int) (183 * widthFactor), (int) (280 * heightFactor), (int) (183 * widthFactor), (int) (310 * heightFactor)); //N  to Control Logic
@@ -939,15 +884,13 @@ public class Circuit extends JPanel
         fDrawFilledTriangle(g, objFP.cNegative2ControlLogicFill, (int) (183 * widthFactor), (int) (280 * heightFactor), (int) (178 * widthFactor), (int) (290 * heightFactor), (int) (188 * widthFactor), (int) (290 * heightFactor));
     }
 
-    public void update(Graphics g)
-    {
+    public void update(Graphics g) {
         System.out.println("UPDATE CALLED");
         paint(g);
     }
 
 
-    public void drawPlusOne(Graphics g)
-    {
+    public void drawPlusOne(Graphics g) {
         g.setColor(objFP.cPlusOneFill);
         g.fillRect((int) (320 * widthFactor), (int) (90 * heightFactor), (int) (20 * widthFactor), (int) (20 * heightFactor));
 
@@ -959,8 +902,7 @@ public class Circuit extends JPanel
     }
 
 
-    public void drawProgramCounter(Graphics g)
-    {
+    public void drawProgramCounter(Graphics g) {
         g.setColor(objFP.cPCFill);
         g.fillRect((int) (240 * widthFactor), (int) (70 * heightFactor), (int) (50 * widthFactor), (int) (20 * heightFactor));
 
@@ -971,8 +913,7 @@ public class Circuit extends JPanel
         g.drawString("PC", (int) (260 * widthFactor), (int) (85 * heightFactor));
     }
 
-    public void drawAT(Graphics g)
-    {
+    public void drawAT(Graphics g) {
         g.setColor(objFP.cATFill);
         g.fillRect((int) (150 * widthFactor), (int) (70 * heightFactor), (int) (30 * widthFactor), (int) (20 * heightFactor));
 
@@ -983,8 +924,7 @@ public class Circuit extends JPanel
         g.drawString("@", (int) (160 * widthFactor), (int) (82 * heightFactor));
     }
 
-    public void drawPLUS(Graphics g)
-    {
+    public void drawPLUS(Graphics g) {
         g.setColor(objFP.cPlusFill);
         g.fillRect((int) (80 * widthFactor), (int) (120 * heightFactor), (int) (30 * widthFactor), (int) (20 * heightFactor));
 
@@ -995,8 +935,7 @@ public class Circuit extends JPanel
         g.drawString("+", (int) (92 * widthFactor), (int) (134 * heightFactor));
     }
 
-    public void drawZEXT_2(Graphics g)
-    {
+    public void drawZEXT_2(Graphics g) {
         g.setColor(objFP.cZEXT_2Fill);
         g.fillRect((int) (15 * widthFactor), (int) (140 * heightFactor), (int) (35 * widthFactor), (int) (20 * heightFactor));
 
@@ -1007,8 +946,7 @@ public class Circuit extends JPanel
         g.drawString("ZEXT", (int) (18 * widthFactor), (int) (154 * heightFactor));
     }
 
-    public void drawZEXT_1(Graphics g)
-    {
+    public void drawZEXT_1(Graphics g) {
         g.setColor(objFP.cZEXT_1Fill);
         g.fillRect((int) (75 * widthFactor), (int) (160 * heightFactor), (int) (35 * widthFactor), (int) (20 * heightFactor));
 
@@ -1019,8 +957,7 @@ public class Circuit extends JPanel
         g.drawString("ZEXT", (int) (78 * widthFactor), (int) (174 * heightFactor));
     }
 
-    public void drawSEXT(Graphics g)
-    {
+    public void drawSEXT(Graphics g) {
         g.setColor(objFP.cSEXTFill);
         g.fillRect((int) (280 * widthFactor), (int) (200 * heightFactor), (int) (50 * widthFactor), (int) (20 * heightFactor));
 
@@ -1031,8 +968,7 @@ public class Circuit extends JPanel
         g.drawString("SEXT", (int) (290 * widthFactor), (int) (215 * heightFactor));
     }
 
-    public void drawPC_MUX(Graphics g)
-    {
+    public void drawPC_MUX(Graphics g) {
         fDrawFilledParallelogram(g, objFP.cPCMuxFill, (int) (240 * widthFactor), (int) (110 * heightFactor), (int) (285 * widthFactor), (int) (110 * heightFactor), (int) (230 * widthFactor), (int) (130 * heightFactor), (int) (295 * widthFactor), (int) (130 * heightFactor));
         fDrawParallelogram(g, objFP.cPCMuxOutline, (int) (240 * widthFactor), (int) (110 * heightFactor), (int) (285 * widthFactor), (int) (110 * heightFactor), (int) (230 * widthFactor), (int) (130 * heightFactor), (int) (295 * widthFactor), (int) (130 * heightFactor));
 
@@ -1040,8 +976,7 @@ public class Circuit extends JPanel
         g.drawString("PCMUX", (int) (239 * widthFactor), (int) (125 * heightFactor));
     }
 
-    public void drawMAR_MUX(Graphics g)
-    {
+    public void drawMAR_MUX(Graphics g) {
         fDrawFilledParallelogram(g, objFP.cMARMuxFill, (int) (40 * widthFactor), (int) (90 * heightFactor), (int) (100 * widthFactor), (int) (90 * heightFactor), (int) (50 * widthFactor), (int) (70 * heightFactor), (int) (90 * widthFactor), (int) (70 * heightFactor));
         fDrawParallelogram(g, objFP.cMARMuxOutline, (int) (40 * widthFactor), (int) (90 * heightFactor), (int) (100 * widthFactor), (int) (90 * heightFactor), (int) (50 * widthFactor), (int) (70 * heightFactor), (int) (90 * widthFactor), (int) (70 * heightFactor));
 
@@ -1050,14 +985,12 @@ public class Circuit extends JPanel
     }
 
 
-    public void drawALUInput(Graphics g)
-    {
+    public void drawALUInput(Graphics g) {
         fDrawFilledParallelogram(g, objFP.cALUInputFill, (int) (435 * widthFactor), (int) (250 * heightFactor), (int) (475 * widthFactor), (int) (250 * heightFactor), (int) (445 * widthFactor), (int) (265 * heightFactor), (int) (465 * widthFactor), (int) (265 * heightFactor));
         fDrawParallelogram(g, objFP.cALUInputOutline, (int) (435 * widthFactor), (int) (250 * heightFactor), (int) (475 * widthFactor), (int) (250 * heightFactor), (int) (445 * widthFactor), (int) (265 * heightFactor), (int) (465 * widthFactor), (int) (265 * heightFactor));
     }
 
-    private void drawLogic(Graphics g)
-    {
+    private void drawLogic(Graphics g) {
 
 
         g.setColor(objFP.cLogicFill);
@@ -1071,8 +1004,7 @@ public class Circuit extends JPanel
 
     }
 
-    private void drawPositive(Graphics g)
-    {
+    private void drawPositive(Graphics g) {
 
 
         g.setColor(objFP.cPositiveFill);
@@ -1086,8 +1018,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawZero(Graphics g)
-    {
+    private void drawZero(Graphics g) {
 
 
         g.setColor(objFP.cZeroFill);
@@ -1101,8 +1032,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawNegative(Graphics g)
-    {
+    private void drawNegative(Graphics g) {
 
 
         g.setColor(objFP.cNegativeFill);
@@ -1116,8 +1046,7 @@ public class Circuit extends JPanel
     }
 
 
-    public void drawInstructionRegister(Graphics g)
-    {
+    public void drawInstructionRegister(Graphics g) {
 
 
         g.setColor(objFP.cIRFill);
@@ -1131,8 +1060,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawCRTSR(Graphics g)
-    {
+    private void drawCRTSR(Graphics g) {
 
 
         g.setColor(objFP.cCRTSRFill);
@@ -1144,8 +1072,7 @@ public class Circuit extends JPanel
         g.drawRect((int) (625 * widthFactor), (int) (430 * heightFactor), (int) (35 * widthFactor), (int) (20 * heightFactor)); //CRTSR
     }
 
-    private void drawCRTDR(Graphics g)
-    {
+    private void drawCRTDR(Graphics g) {
 
 
         g.setColor(objFP.cCRTDRFill);
@@ -1156,8 +1083,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawKBDR(Graphics g)
-    {
+    private void drawKBDR(Graphics g) {
 
 
         g.setColor(objFP.cKBDRFill);
@@ -1168,8 +1094,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawKBSR(Graphics g)
-    {
+    private void drawKBSR(Graphics g) {
 
         g.setColor(objFP.cKBSRFill);
 
@@ -1180,8 +1105,7 @@ public class Circuit extends JPanel
         g.drawRect((int) (410 * widthFactor), (int) (430 * heightFactor), (int) (35 * widthFactor), (int) (20 * heightFactor)); //KBSR
     }
 
-    public void drawControlLogic(Graphics g)
-    {
+    public void drawControlLogic(Graphics g) {
 
         g.setColor(objFP.cControlLogicFill);
 
@@ -1195,8 +1119,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawInput(Graphics g)
-    {
+    private void drawInput(Graphics g) {
 
 
         g.setColor(objFP.cInputFill);
@@ -1209,8 +1132,7 @@ public class Circuit extends JPanel
         g.drawString("INPUT", (int) (445 * widthFactor), (int) (480 * heightFactor));
     }
 
-    private void drawOutput(Graphics g)
-    {
+    private void drawOutput(Graphics g) {
 
         g.setColor(objFP.cOutputFill);
 
@@ -1223,8 +1145,7 @@ public class Circuit extends JPanel
         g.drawString("OUTPUT", (int) (590 * widthFactor), (int) (480 * heightFactor));
     }
 
-    public void drawMAR(Graphics g)
-    {
+    public void drawMAR(Graphics g) {
 
         g.setColor(objFP.cMARFill);
 
@@ -1237,8 +1158,7 @@ public class Circuit extends JPanel
         g.drawString("MAR", (int) (270 * widthFactor), (int) (435 * heightFactor));
     }
 
-    public void drawMDR(Graphics g)
-    {
+    public void drawMDR(Graphics g) {
 
         g.setColor(objFP.cMDRFill);
 
@@ -1251,8 +1171,7 @@ public class Circuit extends JPanel
         g.drawString("MDR", (int) (15 * widthFactor), (int) (435 * heightFactor));
     }
 
-    public void drawMemory(Graphics g)
-    {
+    public void drawMemory(Graphics g) {
 
         g.setColor(objFP.cMemoryFill);
 
@@ -1265,12 +1184,9 @@ public class Circuit extends JPanel
         g.drawString("MEMORY", (int) (125 * widthFactor), (int) (460 * heightFactor));
     }
 
-    public void fDrawMaximized()
-    {
-        try
-        {
-            if ((widthFactor * 2.0f * 0.7f < 25))
-            {
+    public void fDrawMaximized() {
+        try {
+            if ((widthFactor * 2.0f * 0.7f < 25)) {
                 widthFactor = widthFactor * 2.0f * 0.7f;
                 heightFactor = heightFactor * 2.0f * 0.7f;
 
@@ -1278,19 +1194,14 @@ public class Circuit extends JPanel
                 repaint();
                 revalidate();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void fDrawMinimized()
-    {
-        try
-        {
-            if ((widthFactor * 2.0f * 0.7f > 0.2f))
-            {
+    public void fDrawMinimized() {
+        try {
+            if ((widthFactor * 2.0f * 0.7f > 0.2f)) {
                 widthFactor = (widthFactor) / (2.0f * 0.7f);
                 heightFactor = (heightFactor) / (2.0f * 0.7f);
 
@@ -1298,17 +1209,14 @@ public class Circuit extends JPanel
                 repaint();
                 revalidate();
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
-    public void drawALU(Graphics g)
-    {
+    public void drawALU(Graphics g) {
         //To get Screen Resolution.
 
         Polygon pALU = new Polygon();
@@ -1335,10 +1243,8 @@ public class Circuit extends JPanel
         g.drawString("ALU", (int) (472 * widthFactor), (int) (325 * heightFactor));
     }
 
-    public void fDrawRegister(int registerNo, Graphics g)
-    {
-        switch(registerNo)
-        {
+    public void fDrawRegister(int registerNo, Graphics g) {
+        switch (registerNo) {
             case 0:
                 fDrawRegister00(g);
                 break;
@@ -1366,8 +1272,7 @@ public class Circuit extends JPanel
         }
     }
 
-    private void fDrawRegister00(Graphics g)
-    {
+    private void fDrawRegister00(Graphics g) {
         g.setColor(objFP.cRegister00Fill);
 
         g.fillRect((int) (450 * widthFactor), (int) (100 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 1
@@ -1380,8 +1285,7 @@ public class Circuit extends JPanel
         g.drawString("R0", (int) (465 * widthFactor), (int) (120 * heightFactor));
     }
 
-    private void fDrawRegister02(Graphics g)
-    {
+    private void fDrawRegister02(Graphics g) {
         g.setColor(objFP.cRegister02Fill);
 
         g.fillRect((int) (450 * widthFactor), (int) (125 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 3
@@ -1394,8 +1298,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void fDrawRegister04(Graphics g)
-    {
+    private void fDrawRegister04(Graphics g) {
         g.setColor(objFP.cRegister04Fill);
 
         g.fillRect((int) (450 * widthFactor), (int) (150 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 5
@@ -1407,8 +1310,7 @@ public class Circuit extends JPanel
         g.drawString("R4", (int) (465 * widthFactor), (int) (170 * heightFactor));
     }
 
-    private void fDrawRegister06(Graphics g)
-    {
+    private void fDrawRegister06(Graphics g) {
         g.setColor(objFP.cRegister06Fill);
 
         g.fillRect((int) (450 * widthFactor), (int) (175 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 7
@@ -1421,8 +1323,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void fDrawRegister01(Graphics g)
-    {
+    private void fDrawRegister01(Graphics g) {
         g.setColor(objFP.cRegister01Fill);
 
         g.fillRect((int) (500 * widthFactor), (int) (100 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 2
@@ -1435,8 +1336,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void fDrawRegister03(Graphics g)
-    {
+    private void fDrawRegister03(Graphics g) {
         g.setColor(objFP.cRegister03Fill);
 
         g.fillRect((int) (500 * widthFactor), (int) (125 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 4
@@ -1448,8 +1348,7 @@ public class Circuit extends JPanel
         g.drawString("R3", (int) (515 * widthFactor), (int) (145 * heightFactor));
     }
 
-    private void fDrawRegister05(Graphics g)
-    {
+    private void fDrawRegister05(Graphics g) {
         g.setColor(objFP.cRegister05Fill);
 
         g.fillRect((int) (500 * widthFactor), (int) (150 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 6
@@ -1461,8 +1360,7 @@ public class Circuit extends JPanel
         g.drawString("R5", (int) (515 * widthFactor), (int) (170 * heightFactor));
     }
 
-    private void fDrawRegister07(Graphics g)
-    {
+    private void fDrawRegister07(Graphics g) {
         g.setColor(objFP.cRegister07Fill);
 
         g.fillRect((int) (500 * widthFactor), (int) (175 * heightFactor), (int) (50 * widthFactor), (int) (25 * heightFactor));  // register 8
@@ -1475,8 +1373,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void drawRegisters(Graphics g)
-    {
+    private void drawRegisters(Graphics g) {
         g.setColor(objFP.cRegistersFill);
 
         g.fillRect((int) (440 * widthFactor), (int) (90 * heightFactor), (int) (120 * widthFactor), (int) (120 * heightFactor)); // registers
@@ -1494,8 +1391,7 @@ public class Circuit extends JPanel
         fDrawRegister07(g);
     }
 
-    private void fDrawFilledParallelogram(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
-    {
+    private void fDrawFilledParallelogram(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
         g.setColor(c);
 
         Polygon pgnParallelogram = new Polygon();
@@ -1507,8 +1403,7 @@ public class Circuit extends JPanel
         g.fillPolygon(pgnParallelogram);
     }
 
-    private void fDrawParallelogram(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4)
-    {
+    private void fDrawParallelogram(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
         g.setColor(c);
 
         Polygon pgnParallelogram = new Polygon();
@@ -1521,8 +1416,7 @@ public class Circuit extends JPanel
     }
 
 
-    private void fDrawTriangle(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3)
-    {
+    private void fDrawTriangle(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3) {
         g.setColor(c);
 
         g.drawLine(x1, y1, x2, y2);
@@ -1530,8 +1424,7 @@ public class Circuit extends JPanel
         g.drawLine(x1, y1, x3, y3);
     }
 
-    private void fDrawFilledTriangle(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3)
-    {
+    private void fDrawFilledTriangle(Graphics g, Color c, int x1, int y1, int x2, int y2, int x3, int y3) {
         fDrawTriangle(g, c, x1, y1, x2, y2, x3, y3);
 
         Polygon pTriangle = new Polygon();
@@ -1543,8 +1436,7 @@ public class Circuit extends JPanel
         g.fillPolygon(pTriangle);
     }
 
-    public void fResetFlow()
-    {
+    public void fResetFlow() {
         objFP.cRegister00Outline = Color.black; //Color.black;
         objFP.cRegister00Fill = Color.white;
 
