@@ -20,8 +20,8 @@ public class Processor {
     final int ZERO_BIT = 5;
     final int SIGN_BIT = 7;
 
-    public static int iStartingLocation;
-    public static SimulatorPanel objExecute;
+    private static int iStartingLocation;
+    private static SimulatorPanel objExecute;
 
 
     public static final int R0 = 0;
@@ -41,6 +41,22 @@ public class Processor {
         objMemory = new Storage();
         objMAR = new MAR();
         objMDR = new MDR();
+    }
+
+    public static int getiStartingLocation() {
+        return iStartingLocation;
+    }
+
+    public static void setiStartingLocation(int iStartingLocation) {
+        Processor.iStartingLocation = iStartingLocation;
+    }
+
+    public static SimulatorPanel getObjExecute() {
+        return objExecute;
+    }
+
+    public static void setObjExecute(SimulatorPanel objExecute) {
+        Processor.objExecute = objExecute;
     }
 
     public BigInteger getData(BigInteger biLocation) {
@@ -169,23 +185,23 @@ public class Processor {
             temp = "0101" + "000" + temp;
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\n Source Register is R-" + sr1.intValue());
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddText("\n Source Register is R-" + sr1.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\n Destination Register is R-" + reg.intValue());
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddText("\n Destination Register is R-" + reg.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), 9);
+        getObjExecute().objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), 9);
     }
 
     public void fANDR(BigInteger reg, BigInteger sr1, BigInteger sr2) {
@@ -224,22 +240,22 @@ public class Processor {
             temp = "0101" + get3DigitRegisterCode(Processor.R0) + temp;
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\n Source Register are R-" + sr1.intValue() + "  R-" + sr2.intValue());
+        getObjExecute().objExecutionSummary.fAddText("\n Source Register are R-" + sr1.intValue() + "  R-" + sr2.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- ENDS");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- ENDS");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nExecute for Register R- " + reg.intValue());
-        objExecute.objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), sr2.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nExecute for Register R- " + reg.intValue());
+        getObjExecute().objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), sr2.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void LEA(BigInteger reg, BigInteger data, BigInteger PC) {
@@ -271,20 +287,20 @@ public class Processor {
             instruction.putData(StringtoBitSet(temp));
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H   O P E R A N D -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nData Offset is " + data.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H   O P E R A N D -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H   O P E R A N D -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nData Offset is " + data.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H   O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nDestination Register is R" + reg.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nDestination Register is R" + reg.intValue());
 
-        objExecute.objDataFlow.ExecuteforLEA(reg.intValue());
+        getObjExecute().objDataFlow.ExecuteforLEA(reg.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void LDR(BigInteger reg1, BigInteger reg2, BigInteger offset) {                             /* LDR Instruction*/
@@ -313,21 +329,21 @@ public class Processor {
         temp1 = objMemory.getData(readContents(iDestinationRegister).add(offset));
         writeContents(iSourceRegister, temp1);
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\nBase Register is R-" + reg2.intValue() + " and offest" + offset.intValue() + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddText("\nBase Register is R-" + reg2.intValue() + " and offest" + offset.intValue() + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\n Destination Register is R-" + reg2.intValue());
-        objExecute.objDataFlow.fExecuteforLDR(reg1.intValue(), reg2.intValue());
+        getObjExecute().objExecutionSummary.fAddText("\n Destination Register is R-" + reg2.intValue());
+        getObjExecute().objDataFlow.fExecuteforLDR(reg1.intValue(), reg2.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void AddR(BigInteger reg, BigInteger sr1, BigInteger sr2) {
@@ -362,20 +378,20 @@ public class Processor {
             temp = "0001" + "000" + temp;
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D S    -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\n Fetch operands  for ADDR R" + sr1.intValue() + " and R" + sr2.intValue());
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D S    -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D S    -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\n Fetch operands  for ADDR R" + sr1.intValue() + " and R" + sr2.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D S    -- END");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nExecute for ADDR for register R" + reg.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nExecute for ADDR for register R" + reg.intValue());
 
-        objExecute.objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), sr2.intValue());
+        getObjExecute().objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), sr2.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void AddI(BigInteger reg, BigInteger sr1, BigInteger data) {
@@ -409,16 +425,16 @@ public class Processor {
         } else
             System.out.println("Unable to convert to Binary");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\n F E T C H    O P E R A N D S -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nThe Registers are Identified");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n F E T C H    O P E R A N D S -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nThe Registers are Identified");
 
         temp = get4DigitRegisterCode(sr1.intValue()) + data.toString(2);
         instruction.putData(this.StringtoBitSet(temp));
-        objExecute.objDataFlow.fFetchOperandsforReg(sr1.intValue());
+        getObjExecute().objDataFlow.fFetchOperandsforReg(sr1.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n F E T C H    O P E R A N D S -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n F E T C H    O P E R A N D S -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         try {
             if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
@@ -426,13 +442,13 @@ public class Processor {
                 temp = "0101" + get3DigitRegisterCode(reg.intValue()) + temp;
             }
 
-            objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-            objExecute.objExecutionSummary.fAddHeadingText("\n E X E C U T E   O P E R A T I O N - START");
-            objExecute.objExecutionSummary.fAddText("\nExecute  ADDI for Register R" + reg.intValue());
-            objExecute.objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), 9);
+            getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+            getObjExecute().objExecutionSummary.fAddHeadingText("\n E X E C U T E   O P E R A T I O N - START");
+            getObjExecute().objExecutionSummary.fAddText("\nExecute  ADDI for Register R" + reg.intValue());
+            getObjExecute().objDataFlow.fExecuteforAlu(reg.intValue(), sr1.intValue(), 9);
 
-            objExecute.objExecutionSummary.fAddHeadingText("\n E X E C U T E   O P E R A T I O N - END");
-            objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+            getObjExecute().objExecutionSummary.fAddHeadingText("\n E X E C U T E   O P E R A T I O N - END");
+            getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -442,23 +458,23 @@ public class Processor {
 
         String code = "1101000000000000";
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("Source Register is R-7");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddText("Source Register is R-7");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
         MovToPC(readContents(Processor.R7));
-        objExecute.objDataFlow.fExecuteforRet();
+        getObjExecute().objDataFlow.fExecuteforRet();
 
-        objExecute.objExecutionSummary.fAddText("\nNew PC Value is " + readContents(Processor.R7).toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddText("\nNew PC Value is " + readContents(Processor.R7).toString(16) + "(Hex)");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
 
     }
@@ -482,34 +498,34 @@ public class Processor {
 
         makeDelay(1000);
 
-        objExecute.objDataFlow.fExecuteforPC(false);
-        objExecute.objDataFlow.fSetPC();
+        getObjExecute().objDataFlow.fExecuteforPC(false);
+        getObjExecute().objDataFlow.fSetPC();
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D    -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\n offset is" + offset.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddText("\n offset is" + offset.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H       O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\nNew PC Value is " + new BigInteger(finalStr, 2).toString(16).toUpperCase());
+        getObjExecute().objExecutionSummary.fAddText("\nNew PC Value is " + new BigInteger(finalStr, 2).toString(16).toUpperCase());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         if (N == true && FlagValue(com.github.h2002044.lc2.ALU.NEGATIVE) == true) {
             MovToPC(new BigInteger(finalStr, 2));
-            objExecute.objDataFlow.fSetFlags(true, false, false);
+            getObjExecute().objDataFlow.fSetFlags(true, false, false);
         }
         if (Z == true && FlagValue(com.github.h2002044.lc2.ALU.ZERO) == true) {
-            objExecute.objDataFlow.fSetFlags(false, true, false);
+            getObjExecute().objDataFlow.fSetFlags(false, true, false);
             MovToPC(new BigInteger(finalStr, 2));
         }
         if (P == true && FlagValue(com.github.h2002044.lc2.ALU.POSITIVE) == true) {
-            objExecute.objDataFlow.fSetFlags(false, false, true);
+            getObjExecute().objDataFlow.fSetFlags(false, false, true);
             MovToPC(new BigInteger(finalStr, 2));
         }
         makeDelay(1000);
@@ -542,26 +558,26 @@ public class Processor {
         finalStr = temp.substring(0, 7) + subStr;
         code = subStr;
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\nLD Instruction wit Offset-" + offset.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddText("\nLD Instruction wit Offset-" + offset.toString(16) + "(Hex)");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
             code = "0010" + get3DigitRegisterCode(reg.intValue()) + subStr;
             writeContents(reg.intValue(), objMemory.getData(new BigInteger(finalStr, 2)));
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\nLD Instruction with register value R-" + reg.intValue());
+        getObjExecute().objExecutionSummary.fAddText("\nLD Instruction with register value R-" + reg.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void LDI(BigInteger reg, BigInteger offset, BigInteger PC) {
@@ -581,24 +597,24 @@ public class Processor {
         code = subStr;
         BigInteger addr = objMemory.getData(new BigInteger(finalStr, 2));
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\n E V A L U A T E    A D D R E S S  -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n E V A L U A T E    A D D R E S S  -- BEGIN");
 
-        objExecute.objDataFlow.fEvaluateAddress();
+        getObjExecute().objDataFlow.fEvaluateAddress();
 
-        objExecute.objExecutionSummary.fAddText("\nNew PC Value is " + addr.toString(16).toUpperCase() + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddText("\nNew PC Value is " + addr.toString(16).toUpperCase() + "(Hex)");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n E V A L U A T E    A D D R E S S  -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n E V A L U A T E    A D D R E S S  -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
             code = "1010" + get3DigitRegisterCode(reg.intValue()) + subStr;
             writeContents(reg.intValue(), objMemory.getData(addr));
         }
 
-        objExecute.objDataFlow.fFetchOperandsforMemory();
+        getObjExecute().objDataFlow.fFetchOperandsforMemory();
 
-        objExecute.objDataFlow.fExecuteforLD(reg.intValue());
+        getObjExecute().objDataFlow.fExecuteforLD(reg.intValue());
     }
 
     public void STI(BigInteger reg, BigInteger offset, BigInteger PC) {
@@ -619,23 +635,23 @@ public class Processor {
         code = subStr;
         BigInteger addr = objMemory.getData(new BigInteger(finalStr, 2));
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- BEGIN");
 
-        objExecute.objDataFlow.fEvaluateAddress();
+        getObjExecute().objDataFlow.fEvaluateAddress();
 
-        objExecute.objExecutionSummary.fAddText("\nNew PC Value is " + addr.toString(16).toUpperCase() + "\n");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddText("\nNew PC Value is " + addr.toString(16).toUpperCase() + "\n");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objDataFlow.fFetchOperandsforMemory();
+        getObjExecute().objDataFlow.fFetchOperandsforMemory();
 
         if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
             code = "1011" + get3DigitRegisterCode(reg.intValue()) + subStr;
             objMemory.putData(readContents(reg.intValue()), addr);
         }
 
-        objExecute.objDataFlow.fExecuteforST(reg.intValue());
+        getObjExecute().objDataFlow.fExecuteforST(reg.intValue());
     }
 
     public void ST(BigInteger reg, BigInteger offset, BigInteger PC) {
@@ -654,13 +670,13 @@ public class Processor {
         finalStr = temp.substring(0, 7) + subStr;
         code = subStr;
 
-        objExecute.objDataFlow.fFetchOperandsforMemory();
+        getObjExecute().objDataFlow.fFetchOperandsforMemory();
 
 
         if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
             code = "0011" + get3DigitRegisterCode(reg.intValue()) + subStr;
             objMemory.putData(readContents(reg.intValue()), new BigInteger(finalStr, 2));
-            objExecute.objDataFlow.fExecuteforST(reg.intValue());
+            getObjExecute().objDataFlow.fExecuteforST(reg.intValue());
         }
 
     }
@@ -669,11 +685,11 @@ public class Processor {
         objCU.setRorW(true);
         objCU.setMemorIO(true);
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nBase Register R" + reg2.intValue() + "  and offset  " + offset.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nBase Register R" + reg2.intValue() + "  and offset  " + offset.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         String temp = new String("0110");
 //        int iSourceRegister = Processor.R0;
@@ -691,14 +707,14 @@ public class Processor {
         instruction.putData(this.StringtoBitSet(temp));
         objMemory.putData(readContents(reg1.intValue()), readContents(reg2.intValue()).add(offset));
 
-        objExecute.objDataFlow.fExecuterforSTR(reg1.intValue(), reg2.intValue());
+        getObjExecute().objDataFlow.fExecuterforSTR(reg1.intValue(), reg2.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nSourceRegister R" + reg1.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nSourceRegister R" + reg1.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public void JSR(boolean L, BigInteger offset, BigInteger PC) {              /*DONE ,EXCEPT CODE TO BE GENERATED*/
@@ -716,23 +732,23 @@ public class Processor {
         }
         finalStr = temp.substring(0, 7) + subStr;
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S      F O R  J S R-BEGIN");
-        objExecute.objExecutionSummary.fAddText("\n offset is" + offset.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S      F O R  J S R-END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S      F O R  J S R-BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\n offset is" + offset.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S      F O R  J S R-END");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N -BEGIN");
         if (L == true) {
             writeContents(Processor.R7, readContents(Processor.PC));
-            objExecute.objExecutionSummary.fAddText("\nSaving Contents of PC in R7");
+            getObjExecute().objExecutionSummary.fAddText("\nSaving Contents of PC in R7");
         }
-        objExecute.objExecutionSummary.fAddText("\nNew Contents of PC is " + new BigInteger(finalStr).toString(16));
+        getObjExecute().objExecutionSummary.fAddText("\nNew Contents of PC is " + new BigInteger(finalStr).toString(16));
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N  -END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    I N S T R U C T I O N  -END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
         MovToPC(new BigInteger(finalStr, 2));
     }
 
@@ -748,25 +764,25 @@ public class Processor {
             subStr = "0" + subStr;
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- BEGIN");
 
-        objExecute.objDataFlow.fEvaluateAddress();
+        getObjExecute().objDataFlow.fEvaluateAddress();
 
-        objExecute.objExecutionSummary.fAddText("\nRegister R-" + reg.intValue() + " identified ");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddText("\nRegister R-" + reg.intValue() + " identified ");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE V A L U A T E   A D D R E S S -- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -BEGIN");
-        objExecute.objExecutionSummary.fAddText("\nBase Register R" + reg.intValue() + "  and offset  " + offset.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -BEGIN");
+        getObjExecute().objExecutionSummary.fAddText("\nBase Register R" + reg.intValue() + "  and offset  " + offset.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H      O P E R A N D S -END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         if (L == true) {
             writeContents(Processor.R7, readContents(Processor.PC));
             Ltemp = "1";
-            objExecute.objExecutionSummary.fAddHeadingText("\nContents of PC saved in R7");
+            getObjExecute().objExecutionSummary.fAddHeadingText("\nContents of PC saved in R7");
         }
 
         if (reg.intValue() >= Processor.R0 && reg.intValue() <= Processor.R7) {
@@ -775,13 +791,13 @@ public class Processor {
             temp1 = readContents(reg.intValue()).add(offset);
         }
 
-        objExecute.objDataFlow.fHighlightReg(reg.intValue());
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E  -BEGINS");
-        objExecute.objExecutionSummary.fAddText("\nNew PC value is " + temp1.toString(16) + "(Hex)");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E  -ENDS");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objDataFlow.fExecuteforPC(L);
+        getObjExecute().objDataFlow.fHighlightReg(reg.intValue());
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E  -BEGINS");
+        getObjExecute().objExecutionSummary.fAddText("\nNew PC value is " + temp1.toString(16) + "(Hex)");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E  -ENDS");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objDataFlow.fExecuteforPC(L);
 
         MovToPC(temp1);
     }
@@ -791,13 +807,13 @@ public class Processor {
         BigInteger temp = BigInteger.ZERO;
         String code = new String();
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H     O P E R A N D -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H     O P E R A N D -- BEGIN");
 
-        objExecute.objExecutionSummary.fAddText("\nRegister R " + sr1.intValue() + " is Identified as source register");
+        getObjExecute().objExecutionSummary.fAddText("\nRegister R " + sr1.intValue() + " is Identified as source register");
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D-- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nF E T C H    O P E R A N D-- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
 
         if (sr1.intValue() >= Processor.R0 && sr1.intValue() <= Processor.R7) {
             temp = readContents(sr1.intValue());
@@ -809,14 +825,14 @@ public class Processor {
             code = "1001" + get3DigitRegisterCode(desReg.intValue()) + code;
         }
 
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E     O P E R A N D -- BEGIN");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E     O P E R A N D -- BEGIN");
 
-        objExecute.objDataFlow.fExecuteforAlu(desReg.intValue(), sr1.intValue(), -1);
-        objExecute.objExecutionSummary.fAddText("\n Destination Register is R " + desReg.intValue());
+        getObjExecute().objDataFlow.fExecuteforAlu(desReg.intValue(), sr1.intValue(), -1);
+        getObjExecute().objExecutionSummary.fAddText("\n Destination Register is R " + desReg.intValue());
 
-        objExecute.objExecutionSummary.fAddHeadingText("\nE X E C U T E    O P E R A N D-- END");
-        objExecute.objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\nE X E C U T E    O P E R A N D-- END");
+        getObjExecute().objExecutionSummary.fAddHeadingText("\n--------------------------------------------------------------------");
     }
 
     public String get3DigitRegisterCode(int iRegister) {
