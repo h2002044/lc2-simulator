@@ -40,7 +40,6 @@ public class FlashScreen extends JWindow {
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         getContentPane().setLayout(null);
         jpProgressBar = new JPanel();
-        ImageIcon iIcon = new ImageIcon(this.getClass().getClassLoader().getResource("Icons/MainBig.jpg"));
 
         JLabel jlblLogo = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/MainBig.jpg")));
 

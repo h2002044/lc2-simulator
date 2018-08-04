@@ -329,14 +329,14 @@ public class Editor extends JPanel implements ActionListener {
                     }
                     if (iLoop == 4) {
                         fUpdateHashTable((String) jcbSegment.getSelectedItem());
-                        Input.bRunning = true;
+                        Input.getInput().setbRunning(true);
                         objExe = new Execute();
                         toolBar.setObjExe(objExe);
                         System.out.println("Location : " + sLocation);
                         //System.out.println("Processor : " + Processor);
-                        Processor.iStartingLocation = new BigInteger(sLocation, 16).intValue();
-                        Processor.objExecute = objExecute;
-                        System.out.println("Processor.objExecute : " + Processor.objExecute);
+                        Processor.setiStartingLocation(new BigInteger(sLocation, 16).intValue());
+                        Processor.setObjExecute(objExecute);
+                        System.out.println("Processor.objExecute : " + Processor.getObjExecute());
 
                         if (e.getActionCommand().equalsIgnoreCase("STEP") == true) {
                             objExe.fSetMode("STEP");
@@ -3275,7 +3275,6 @@ public class Editor extends JPanel implements ActionListener {
 
     public void fInitialiseRAM(FlashScreen objFlashScreen) {
 
-        Execute obje = new Execute();
         htMemory = new Storage();
 
         htMnemonics = new Hashtable(65535);

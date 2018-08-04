@@ -21,7 +21,7 @@ public class Input extends JFrame {
     Editor objEditor;
 
     private static boolean bRun = false;
-    static boolean bRunning = false;
+    private static boolean bRunning = false;
     boolean bWindowClosing = false;
     int iOption = -1;
 
@@ -40,6 +40,14 @@ public class Input extends JFrame {
     Font fnt;
     Font fntBlueBoldFont;
 
+    final static  Input input;
+    static {
+        input = new Input();
+    }
+
+    public static Input getInput(){
+        return input;
+    }
 
     /**
      * Input Class is used to initialise the GUI for LC-2 Simulator.<br>
@@ -48,7 +56,7 @@ public class Input extends JFrame {
      * Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
      */
 
-    public Input() {
+    private Input() {
         setIconImage(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/Icon.gif")).getImage());
         setTitle(" L C -- 2  S I M U L A T O R   [ B I T S - P I L A N I ]");
         getContentPane().setLayout(new BorderLayout());
@@ -121,6 +129,14 @@ public class Input extends JFrame {
             objFlashScreen.fResetLoadingStatus();
         }
         objEditor.fEnableRunStatus();
+    }
+
+    public static boolean isbRunning() {
+        return bRunning;
+    }
+
+    public static void setbRunning(boolean bRunning) {
+        Input.bRunning = bRunning;
     }
 
     /**
@@ -333,9 +349,9 @@ public class Input extends JFrame {
                     jtpMain.setSelectedIndex(1);
                 }
             } else {
-                if (bRunning == true) {
+                if (isbRunning() == true) {
                     objEditor.fUpdateTableAfterRun();
-                    bRunning = false;
+                    setbRunning(false);
                     jtbEditor.fDisableRun();
                     jtbEditor.fDisableStep();
                     jtbEditor.fDisableStop();

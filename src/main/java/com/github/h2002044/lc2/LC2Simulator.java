@@ -2,9 +2,10 @@ package com.github.h2002044.lc2;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 
 public class LC2Simulator {
@@ -12,7 +13,7 @@ public class LC2Simulator {
     Input objInput;
 
     public LC2Simulator() {
-        objInput = new Input();
+        objInput = Input.getInput();
         objInput.setSize(1200, 750);
         objInput.setBounds(0, 0, 1000, 750);
         objInput.setVisible(true);
@@ -24,7 +25,7 @@ public class LC2Simulator {
      */
 
     public static void main(String a[]) {
-        LC2Simulator objCOMPUTER = new LC2Simulator();
+        new LC2Simulator();
     }
 }
 
@@ -55,8 +56,8 @@ class Execute extends Thread {
         String strInput = "";
         System.out.print("Location:");
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
         try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
             BigInteger x = new BigInteger(rd.readLine());
 
             BigInteger opcode = BigInteger.ONE;
@@ -375,7 +376,7 @@ class Execute extends Thread {
 
     public void run() {
         makeDelay(1000);
-        Exec(new BigInteger(new Integer(Processor.iStartingLocation).toString()), Processor.objExecute);
+        Exec(new BigInteger(new Integer(Processor.getiStartingLocation()).toString()), Processor.getObjExecute());
 
         Input.setRun(false);
     }
@@ -383,18 +384,18 @@ class Execute extends Thread {
     public void fopenfile(String Filename) {
         try {
             File ifileopen = new File(Filename);
-            FileWriter ifile_wr = new FileWriter(ifileopen);
+            OutputStreamWriter streamWriter = new OutputStreamWriter(new FileOutputStream(ifileopen), "UTF_8");
             String tempFileData = new String();
             //String strLoc = new String();
             for (int iloop = 0; iloop <= 65535; iloop++) {
                 //  strLoc=new Integer(iloop).toString();
                 tempFileData = objProcessor.getData(new BigInteger(new Integer(iloop).toString())).toString(16);
                 if (tempFileData.equalsIgnoreCase("FFFF") == false) {
-                    ifile_wr.write(new Integer(iloop).toString() + "\t" + tempFileData);
+                    streamWriter.write(new Integer(iloop).toString() + "\t" + tempFileData);
 
                 }
             }
-            ifile_wr.close();
+            streamWriter.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
