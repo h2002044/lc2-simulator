@@ -1,4 +1,4 @@
-package com.github.h2002044.lc2;
+package com.github.h2002044.lc2.view;
 
 import javax.swing.*;
 import javax.swing.text.DefaultStyledDocument;
@@ -9,7 +9,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 
-class FlowSummary extends JPanel {
+public class FlowSummary extends JPanel {
     JTextPane jtpSummary;
     JScrollPane jspSummary;
 
@@ -54,6 +54,10 @@ class FlowSummary extends JPanel {
             e.printStackTrace();
         }
 
+    }
+
+    public void setTextPaneSummary(String text){
+        this.jtpSummary.setText(text);
     }
 
     public void fAddText(String sText) {

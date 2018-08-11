@@ -1,4 +1,4 @@
-package com.github.h2002044.lc2;
+package com.github.h2002044.lc2.view;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -10,7 +10,7 @@ import java.math.BigInteger;
 /**
  * clsRegistersPanel class is used to display All registers, Flags, PC in run time and also option to modify the values of Registers, PC after every instruction<br>
  */
-class RegistersPanel extends JPanel implements ActionListener {
+public class RegistersPanel extends JPanel implements ActionListener {
 
     //JPanel jpRegisters = new JPanel();
 

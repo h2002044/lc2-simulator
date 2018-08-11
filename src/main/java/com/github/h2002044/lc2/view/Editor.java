@@ -1,4 +1,9 @@
-package com.github.h2002044.lc2;
+package com.github.h2002044.lc2.view;
+
+import com.github.h2002044.lc2.Execute;
+import com.github.h2002044.lc2.Mnemonics;
+import com.github.h2002044.lc2.Processor;
+import com.github.h2002044.lc2.Storage;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -62,7 +67,7 @@ public class Editor extends JPanel implements ActionListener {
     private JCheckBox jcbR7State;
 
     Storage htMemory;
-    Hashtable htMnemonics;
+    Mnemonics htMnemonics;
 
     private int iTableRowCount = 511;
     private int iTableRowPosition = 0;
@@ -3277,7 +3282,7 @@ public class Editor extends JPanel implements ActionListener {
 
         htMemory = new Storage();
 
-        htMnemonics = new Hashtable(65535);
+        htMnemonics = Mnemonics.getMnemonics();
 
 
         int iIncrement = 1;
@@ -3297,7 +3302,6 @@ public class Editor extends JPanel implements ActionListener {
             }
 
             htMemory.putData((new BigInteger("FFFF", 16)), (new BigInteger(new Integer(iLoop).toString())));
-            htMnemonics.put((new BigInteger(new Integer(iLoop).toString())), "");
         }
     }
 
