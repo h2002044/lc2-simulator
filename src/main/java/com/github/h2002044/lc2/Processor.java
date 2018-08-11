@@ -1,5 +1,7 @@
 package com.github.h2002044.lc2;
 
+import com.github.h2002044.lc2.view.SimulatorPanel;
+
 import java.math.BigInteger;
 import java.util.BitSet;
 

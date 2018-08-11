@@ -1,4 +1,6 @@
-package com.github.h2002044.lc2;
+package com.github.h2002044.lc2.view;
+
+import com.github.h2002044.lc2.OutputSummary;
 
 import javax.swing.*;
 import java.awt.*;

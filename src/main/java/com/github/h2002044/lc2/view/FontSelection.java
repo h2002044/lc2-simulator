@@ -1,4 +1,4 @@
-package com.github.h2002044.lc2;
+package com.github.h2002044.lc2.view;
 
 /*
  * @(#)FontSelection.java   1.2 98/07/31
