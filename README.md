@@ -53,6 +53,8 @@ LC-2 Simulator is used to run the Assembly Code of LC-2 Microprocessor. This sof
 *   Summary of all the micro instructions that are getting executed.
 
 
+## LC-2 Simulator in action:
+[![LC-2 Simulator in action!](http://img.youtube.com/vi/FnA9o9brSXM/0.jpg)](http://www.youtube.com/watch?v=FnA9o9brSXM)
 
 
 ## Architecture:
