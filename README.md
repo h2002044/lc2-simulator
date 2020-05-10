@@ -553,3 +553,9 @@ The **_Instruction Summary Panel_** shows the summary of execution of every inst
 * mvn clean install
 * java -jar $PROJECT_HOME/target/lc2-simulator-$PROJECT_VERSION.jar
 * Once the simulator starts, use any of the files from `src/main/resources` having `.LC2` extension for samples.
+* Once a ".LC2" file is chosen, a dialog prompt states where the `code instructions` are present i.e., the `segment number`.
+  * From the drop down `Current Segment`, pick the segment that has `instructions`
+  * In the `Execute` panel, provide the `Address` from where the code execution should begin from.
+  * Press `Run` or `Step` to start the simulation.
+* Once the code execution starts, simulation pane will start showing the instruction execution in `graphical` format.
+  * If `Step` mode of execution was chosen, press the `Debug` icon on the tool bar to continue execution step by step or choose `Run` icon to finish executing all instructions.  
