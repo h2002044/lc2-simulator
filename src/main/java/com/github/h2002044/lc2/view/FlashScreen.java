@@ -1,7 +1,14 @@
 package com.github.h2002044.lc2.view;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JWindow;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,70 +18,78 @@ import java.awt.*;
  * To change this template use File | Settings | File Templates.
  */
 public class FlashScreen extends JWindow {
-    private JProgressBar jpbBar;
-    private JPanel jpProgressBar;
-    private JPanel jpScreen;
+    private JProgressBar progressBar;
+    private JPanel progressBarPanel;
+    private JPanel screen;
 
-    private int iValue = 0;
-    private String sProgressText = "";
-    private boolean bStatus = true;
-    private boolean bFirstLoading = true;
+    private int progressValue = 0;
+    private String progressText = "";
+    private boolean finishedLoading = true;
+    private boolean loadingInProgress = true;
 
     public boolean fGetLoadingStatus() {
-        return bFirstLoading;
+        return loadingInProgress;
     }
 
     public void fResetLoadingStatus() {
-        bFirstLoading = false;
+        loadingInProgress = false;
     }
 
     public void fSetLoadingStatus(boolean bLoadingStatus) {
-        this.bFirstLoading = bLoadingStatus;
+        this.loadingInProgress = bLoadingStatus;
     }
 
     public void fSetFinishedStatus(boolean bStatus) {
-        this.bStatus = bStatus;
+        this.finishedLoading = bStatus;
     }
 
     public FlashScreen(String sText, int iMaxValue, float heightFactor) {
         this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
         getContentPane().setLayout(null);
-        jpProgressBar = new JPanel();
+        progressBarPanel = new JPanel();
 
-        JLabel jlblLogo = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/MainBig.jpg")));
 
-        jpProgressBar.setSize(350, 275);
-        jpProgressBar.setLocation(0, 0);
-        jpProgressBar.add(jlblLogo);
+        Dimension dmnScreen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        int panelWidth = (int) Math.round(dmnScreen.getWidth() * 0.2);
+        int panelHeight = (int) Math.round(dmnScreen.getHeight() * 0.2);
 
-        jpbBar = new JProgressBar(0, 100);
+        progressBarPanel.setSize(panelWidth, panelHeight);
+        progressBarPanel.setLocation(0, 0);
 
-        jpbBar.setSize(350, 25);
-        jpbBar.setLocation(0, 275);
-        jpbBar.setBackground(new Color(204, 204, 204));
-        jpbBar.setFont(new Font("ARIAL", Font.BOLD, (int) (10 * heightFactor)));
+        progressBar = new JProgressBar(0, 100);
+        int progressBarHeight = (int) Math.round(panelHeight * 0.1);
+        progressBar.setSize(new Dimension(panelWidth, progressBarHeight));
+        progressBar.setLocation(0, panelHeight - 5);
+        progressBar.setBackground(new Color(204, 204, 204));
+        progressBar.setForeground(new Color(0, 0, 0));
+        int fontSize = (int) Math.round(progressBarHeight * 0.5);
+        Font font = new Font("ARIAL", Font.BOLD, fontSize);
+        progressBar.setFont(font);
 
-        getContentPane().add(jpProgressBar);
-        getContentPane().add(jpbBar);
+        JLabel logoLabel = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/processor.jpg")));
+        logoLabel.setSize(panelWidth, panelHeight - progressBarHeight);
+        progressBarPanel.add(logoLabel);
 
-        jpbBar.setStringPainted(true);
+        getContentPane().add(progressBarPanel);
+        getContentPane().add(progressBar);
 
+        progressBar.setStringPainted(true);
     }
 
     public void fSetText(String sText) {
-        jpbBar.setString(sText);
-        jpbBar.setStringPainted(true);
-        jpbBar.validate();
+        progressBar.setString(sText);
+        progressBar.setStringPainted(true);
+        progressBar.validate();
     }
 
     public void fSetValue(int value) {
-        iValue = value;
-        jpbBar.setString(sProgressText);
-        jpbBar.setValue(iValue);
-        jpbBar.setStringPainted(true);
-        jpbBar.validate();
+        this.progressValue = value;
+        progressBar.setString(progressText);
+        progressBar.setValue(this.progressValue);
+        progressBar.setStringPainted(true);
+        progressBar.validate();
 
-        if (iValue == 100) {
+        if (this.progressValue == 100) {
             this.setCursor(new Cursor(Cursor.CUSTOM_CURSOR));
         }
     }

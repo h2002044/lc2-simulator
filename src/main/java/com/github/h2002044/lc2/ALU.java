@@ -30,6 +30,14 @@ public class ALU {
         flags[ZERO] = false;
         flags[POSITIVE] = false;
 
+        R0 = new Register();
+        R1 = new Register();
+        R2 = new Register();
+        R3 = new Register();
+        R4 = new Register();
+        R5 = new Register();
+        R6 = new Register();
+        R7 = new Register();
     }
 
     public boolean FlagValue(int iFlag) {

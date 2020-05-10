@@ -1,9 +1,19 @@
 package com.github.h2002044.lc2.view;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -14,39 +24,40 @@ import java.awt.event.WindowEvent;
  * Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
  */
 
-public class Input extends JFrame {
+public class SimulatorWindow extends JFrame {
     Container contentpane;
-    JTabbedPane jtpMain;
-    JTabbedPane jtpSimulate;
-    Editor objEditor;
+    JTabbedPane editorPane;
+    JTabbedPane simulationPane;
+    Editor editor;
 
     private static boolean bRun = false;
     private static boolean bRunning = false;
     boolean bWindowClosing = false;
     int iOption = -1;
 
-    SimulatorPanel objExecute;
+    SimulatorPanel simulatorPanel;
     // Storage objStorage;
 
-    float fWidthFactor;
-    float fHeightFactor;
+    float widthFactor;
+    float heightFactor;
 
     private int iScreenWidth;
     private int iScreenHeight;
 
-    ToolBar jtbEditor;
-    FlashScreen objFlashScreen;
+    ToolBar editorToolBar;
+    FlashScreen flashScreen;
 
     Font fnt;
     Font fntBlueBoldFont;
 
-    final static  Input input;
+    final static SimulatorWindow SIMULATOR_WINDOW;
+
     static {
-        input = new Input();
+        SIMULATOR_WINDOW = new SimulatorWindow();
     }
 
-    public static Input getInput(){
-        return input;
+    public static SimulatorWindow getWindow() {
+        return SIMULATOR_WINDOW;
     }
 
     /**
@@ -56,79 +67,80 @@ public class Input extends JFrame {
      * Simulator Window shows the run time simulation of Data Flow for every instruction involved in the program.<br>
      */
 
-    private Input() {
+    private SimulatorWindow() {
         setIconImage(new ImageIcon(this.getClass().getClassLoader().getResource("Icons/Icon.gif")).getImage());
         setTitle(" L C -- 2  S I M U L A T O R   [ B I T S - P I L A N I ]");
         getContentPane().setLayout(new BorderLayout());
 
         fSetDimension();
 
-        objFlashScreen = new FlashScreen("INITIALISING . . . .", 100, fHeightFactor);
-        objFlashScreen.setSize(350, 300);
+        flashScreen = new FlashScreen("INITIALISING . . . .", 100, heightFactor);
+
+        Dimension dmnScreen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        int panelWidth = (int) Math.round(dmnScreen.getWidth() * 0.2);
+        int panelHeight = (int) Math.round(dmnScreen.getHeight() * 0.2);
+
+        int xCoordinate = (int) (widthFactor * 800);
+        int yCoordinate = (int) (heightFactor * 600);
+
+        int widthStart = panelWidth;
+        int heightStart = panelHeight;
+
+        widthStart = ((int) (xCoordinate / 2.0f)) - ((int) (widthStart / 2.0f));
+        heightStart = ((int) (yCoordinate / 2.0f)) - ((int) (heightStart / 2.0f));
+
+        flashScreen.setBounds(widthStart, heightStart, panelWidth, panelHeight + 25);
+        flashScreen.setVisible(true);
+        flashScreen.validate();
+
+        delay();
+
+        editorPane = new JTabbedPane();
+
+        flashScreen.fSetText("I N I T I A L I S I N G     E D I T O R  . . .");
+        delay();
+        simulatorPanel = new SimulatorPanel();
+        editor = new Editor(editorPane, simulatorPanel, flashScreen, widthFactor, heightFactor, fnt, fntBlueBoldFont);
 
 
-        int iXPosition = (int) (fWidthFactor * 800);
-        int iYPosition = (int) (fHeightFactor * 600);
+        flashScreen.fSetText("I N I T I A L I S I N G     T O O L B A R . . .");
 
-        int iWidthStart = (int) (350);
-        int iHeightStart = (int) (300);
+        delay();
 
-        iWidthStart = ((int) (iXPosition / 2.0f)) - ((int) (iWidthStart / 2.0f));
-        iHeightStart = ((int) (iYPosition / 2.0f)) - ((int) (iHeightStart / 2.0f));
+        editorToolBar = new ToolBar(widthFactor, heightFactor, editor, null, simulatorPanel);
+        editor.setToolBar(editorToolBar);
+        editorToolBar.fDisableRun();
+        editorToolBar.fDisableStep();
+        editorToolBar.fDisableStop();
 
-        objFlashScreen.setBounds((int) (iWidthStart), (int) (iHeightStart), (int) (350), (int) (300));
-        objFlashScreen.setVisible(true);
-        objFlashScreen.show();
-        objFlashScreen.validate();
+        editorToolBar.setSize((int) (50 * widthFactor), (int) (300 * heightFactor));
+        editorToolBar.setLocation((int) (10 * widthFactor), (int) (35 * heightFactor));
+        getContentPane().add(editorToolBar, BorderLayout.WEST);
 
-        fDelay();
-
-        jtpMain = new JTabbedPane();
-
-        objFlashScreen.fSetText("I N I T I A L I S I N G     E D I T O R  . . .");
-        fDelay();
-        objExecute = new SimulatorPanel();
-        objEditor = new Editor(jtpMain, objExecute, objFlashScreen, fWidthFactor, fHeightFactor, fnt, fntBlueBoldFont);
+        editorPane.addTab("C O D E - - E D I T O R", editor);
+        editorPane.setTabPlacement(1);
 
 
-        objFlashScreen.fSetText("I N I T I A L I S I N G     T O O L B A R . . .");
-
-        fDelay();
-
-        jtbEditor = new ToolBar(fWidthFactor, fHeightFactor, objEditor, null, objExecute);
-        objEditor.setToolBar(jtbEditor);
-        jtbEditor.fDisableRun();
-        jtbEditor.fDisableStep();
-        jtbEditor.fDisableStop();
-
-        jtbEditor.setSize((int) (50 * fWidthFactor), (int) (300 * fHeightFactor));
-        jtbEditor.setLocation((int) (10 * fWidthFactor), (int) (35 * fHeightFactor));
-        getContentPane().add(jtbEditor, BorderLayout.WEST);
-
-        jtpMain.addTab("C O D E - - E D I T O R", objEditor);
-        jtpMain.setTabPlacement(1);
+        editorPane.addChangeListener(
+            new TabbedPaneChangeListener());
 
 
-        jtpMain.addChangeListener(
-                new TabbedPaneChangeListener());
+        flashScreen.fSetText("I N I T I A L I S I N G    S I M U L A T O R . . .");
+        delay();
 
+        editorPane.addTab("S I M U L A T O R", simulatorPanel);
 
-        objFlashScreen.fSetText("I N I T I A L I S I N G    S I M U L A T O R . . .");
-        fDelay();
-
-        jtpMain.addTab("S I M U L A T O R", objExecute);
-
-        getContentPane().add(jtpMain, BorderLayout.CENTER);
+        getContentPane().add(editorPane, BorderLayout.CENTER);
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new MyWindowAdapter());
 
-        if (objFlashScreen.fGetLoadingStatus() == true) {
-            objFlashScreen.setVisible(false);
-            objFlashScreen.hide();
-            objFlashScreen.fResetLoadingStatus();
+        if (flashScreen.fGetLoadingStatus() == true) {
+            flashScreen.setVisible(false);
+            flashScreen.hide();
+            flashScreen.fResetLoadingStatus();
         }
-        objEditor.fEnableRunStatus();
+        editor.fEnableRunStatus();
     }
 
     public static boolean isbRunning() {
@@ -136,7 +148,7 @@ public class Input extends JFrame {
     }
 
     public static void setbRunning(boolean bRunning) {
-        Input.bRunning = bRunning;
+        SimulatorWindow.bRunning = bRunning;
     }
 
     /**
@@ -144,9 +156,9 @@ public class Input extends JFrame {
      * The Flash Screen displays the components that are getting initialised sequentially<br>
      */
 
-    public void fDelay() {
+    public void delay() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -189,7 +201,7 @@ public class Input extends JFrame {
      */
 
     private JMenuBar fSetMenuBar() {
-        JMenuBar jmbEditor = new JMenuBar();
+        JMenuBar menuBar = new JMenuBar();
 
         JMenu jmFile = new JMenu("File");
         jmFile.setFont(fnt);
@@ -213,7 +225,7 @@ public class Input extends JFrame {
         jmiNew.setMnemonic('X');
         jmFile.add(jmiExit);
 
-        jmbEditor.add(jmFile);
+        menuBar.add(jmFile);
 
         JMenu jmProgram = new JMenu("Program");
         jmFile.setMnemonic('P');
@@ -230,7 +242,7 @@ public class Input extends JFrame {
         jmiNew.setMnemonic('P');
         jmProgram.add(jmiStop);
 
-        jmbEditor.add(jmProgram);
+        menuBar.add(jmProgram);
 
         JMenu jmHelp = new JMenu("Help");
         jmHelp.setMnemonic('H');
@@ -247,9 +259,9 @@ public class Input extends JFrame {
         jmiConfiguration.setMnemonic('C');
         jmHelp.add(jmiConfiguration);
 
-        jmbEditor.add(jmHelp);
+        menuBar.add(jmHelp);
 
-        return (jmbEditor);
+        return (menuBar);
 
     }
 
@@ -263,26 +275,26 @@ public class Input extends JFrame {
         setScreenWidth(dmnScreen.width);
         setScreenHeight(dmnScreen.height);
 
-        fWidthFactor = ((float) getScreenWidth() / 800);
-        fHeightFactor = ((float) getScreenHeight() / 600);
+        widthFactor = ((float) getScreenWidth() / 800);
+        heightFactor = ((float) getScreenHeight() / 600);
 
-        fnt = new Font("ARIAL", Font.PLAIN, (int) (10 * fHeightFactor));
-        fntBlueBoldFont = new Font("ARIAL", Font.BOLD, (int) (10 * fHeightFactor));
+        fnt = new Font("ARIAL", Font.PLAIN, (int) (10 * heightFactor));
+        fntBlueBoldFont = new Font("ARIAL", Font.BOLD, (int) (10 * heightFactor));
 
 
-        System.out.println("Width Factor : " + fWidthFactor);
-        System.out.println("Height Factor : " + fHeightFactor);
+        System.out.println("Width Factor : " + widthFactor);
+        System.out.println("Height Factor : " + heightFactor);
     }
 
     /**
      * fInitialiseInput is used to initialise the components for EDITOR<br>
      */
     public void fInitialiseInput() {
-        objEditor = new Editor(jtpMain, objExecute, objFlashScreen, fWidthFactor, fHeightFactor, fnt, fntBlueBoldFont);
+        editor = new Editor(editorPane, simulatorPanel, flashScreen, widthFactor, heightFactor, fnt, fntBlueBoldFont);
 
 
-        jtpMain.addTab("C O D E -- E D I T O R", objEditor);
-        jtpMain.validate();
+        editorPane.addTab("C O D E -- E D I T O R", editor);
+        editorPane.validate();
     }
 
 
@@ -301,7 +313,7 @@ public class Input extends JFrame {
      * @ param Status of the program running/not running.<br>
      */
     public static void setRun(boolean bRun) {
-        Input.bRun = bRun;
+        SimulatorWindow.bRun = bRun;
     }
 
     /**
@@ -344,17 +356,17 @@ public class Input extends JFrame {
     private class TabbedPaneChangeListener implements ChangeListener {
         public void stateChanged(ChangeEvent ce) {
             if (isRun() == true) {
-                int iIndex = jtpMain.getSelectedIndex();
+                int iIndex = editorPane.getSelectedIndex();
                 if (iIndex == 0) {
-                    jtpMain.setSelectedIndex(1);
+                    editorPane.setSelectedIndex(1);
                 }
             } else {
                 if (isbRunning() == true) {
-                    objEditor.fUpdateTableAfterRun();
+                    editor.fUpdateTableAfterRun();
                     setbRunning(false);
-                    jtbEditor.fDisableRun();
-                    jtbEditor.fDisableStep();
-                    jtbEditor.fDisableStop();
+                    editorToolBar.fDisableRun();
+                    editorToolBar.fDisableStep();
+                    editorToolBar.fDisableStop();
                 }
             }
         }
@@ -364,7 +376,7 @@ public class Input extends JFrame {
         public void windowClosing(WindowEvent we) {
             int iSaveStatus = JOptionPane.showConfirmDialog(null, "S A V E  F I L E ", "SAVE  FILE", JOptionPane.YES_NO_CANCEL_OPTION);
             if (iSaveStatus == JOptionPane.YES_OPTION) {
-                objEditor.fSaveHashTable2File();
+                editor.fSaveHashTable2File();
 
                 bWindowClosing = true;
                 iOption = iSaveStatus;

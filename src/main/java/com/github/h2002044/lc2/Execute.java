@@ -1,6 +1,6 @@
 package com.github.h2002044.lc2;
 
-import com.github.h2002044.lc2.view.Input;
+import com.github.h2002044.lc2.view.SimulatorWindow;
 import com.github.h2002044.lc2.view.SimulatorPanel;
 
 import java.io.BufferedReader;
@@ -359,7 +359,7 @@ public class Execute extends Thread {
         makeDelay(1000);
         Exec(new BigInteger(new Integer(Processor.getiStartingLocation()).toString()), Processor.getObjExecute());
 
-        Input.setRun(false);
+        SimulatorWindow.setRun(false);
     }
 
     public void fopenfile(String Filename) {

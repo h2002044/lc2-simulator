@@ -15,7 +15,7 @@ public class OutputSummary {
         jspFileInfo = new JScrollPane();
         jspFileInfo.setViewportView(jtaFileInfo);
 
-        getChoicesString()[0] = "O-K";
+        getChoicesString()[0] = "OK";
 
         jtaFileInfo.setEditable(false);
     }

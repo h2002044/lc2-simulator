@@ -334,7 +334,7 @@ public class Editor extends JPanel implements ActionListener {
                     }
                     if (iLoop == 4) {
                         fUpdateHashTable((String) jcbSegment.getSelectedItem());
-                        Input.getInput().setbRunning(true);
+                        SimulatorWindow.getWindow().setbRunning(true);
                         objExe = new Execute();
                         toolBar.setObjExe(objExe);
                         System.out.println("Location : " + sLocation);
@@ -359,7 +359,7 @@ public class Editor extends JPanel implements ActionListener {
                         jtbStartingLocation.setText("");
 
                         fResetInstructions();
-                        Input.setRun(true);
+                        SimulatorWindow.setRun(true);
                         jtpMain.setSelectedIndex(1);
                     } else {
                         JOptionPane.showMessageDialog(null, "Enter 4 Digit Hexadecimal Value - (eg: ffff)", "4-Digit Hex Value", JOptionPane.ERROR_MESSAGE);
@@ -3498,7 +3498,7 @@ public class Editor extends JPanel implements ActionListener {
         jspFileInfo.setViewportView(jtaFileInfo);
 
         String sChoices[] = new String[1];
-        sChoices[0] = "O-K";
+        sChoices[0] = "OK";
 
         jtaFileInfo.setEditable(false);
 
